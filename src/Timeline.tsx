@@ -7,12 +7,14 @@ import {
   Text,
   TouchableOpacity,
 } from 'react-native';
+import {observer} from 'mobx-react';
 
-export default function Timeline({
+const Timeline = ({
   data,
   style,
   listViewStyle,
   options,
+
   columnFormat = 'single-column-left',
   rowContainerStyle,
   showTime = true,
@@ -28,9 +30,9 @@ export default function Timeline({
   lineWidth = 2,
   circleSize = 70,
   circleColor = '#007AFF',
-  lineColor = '#F035E0',
+  lineColor = 'black',
   dotColor = 'white',
-}) {
+}) => {
   const [x, setX] = useState(0);
   const [width, setWidth] = useState(0);
 
@@ -89,6 +91,7 @@ export default function Timeline({
           alignItems: 'flex-end',
           zIndex: 2,
           marginTop: 25,
+          left: 10,
         };
         break;
       case 'single-column-right':
@@ -110,7 +113,7 @@ export default function Timeline({
     return (
       <View style={timeWrapper}>
         <View style={[styles.timeContainer, timeContainerStyle]}>
-          <Text style={[styles.time, timeStyle]}>{rowData.time}</Text>
+          <Text style={[styles.time, timeStyle]}>{rowData.date}</Text>
         </View>
       </View>
     );
@@ -218,7 +221,7 @@ export default function Timeline({
           height: x ? circleSize : 0,
           borderRadius: circleSize / 2,
           backgroundColor: 'white',
-          left: 0,
+          left: 10,
         };
         break;
       case 'single-column-right':
@@ -298,7 +301,7 @@ export default function Timeline({
       />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -328,7 +331,7 @@ const styles = StyleSheet.create({
   },
   timeContainer: {
     minWidth: 45,
-    width: 60,
+    width: 80,
   },
   time: {
     textAlign: 'right',
@@ -373,3 +376,5 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
+
+export default observer(Timeline);

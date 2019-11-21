@@ -6,6 +6,7 @@ import LoginScreen from './src/components/LoginScreen';
 import Main from './src/components/Main';
 import CreateAccount from './src/components/CreateAccount';
 import ForgotPassword from './src/components/ForgotPassword';
+import AddEventScreen from './src/components/AddEventScreen';
 
 const App = createSwitchNavigator(
   {
@@ -14,6 +15,7 @@ const App = createSwitchNavigator(
     Main,
     CreateAccount,
     ForgotPassword,
+    AddEventScreen,
   },
   {
     initialRouteName: 'Loading',
