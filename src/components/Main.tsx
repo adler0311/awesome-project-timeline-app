@@ -5,7 +5,7 @@ import {inject, observer} from 'mobx-react';
 import ViewShot, {captureScreen} from 'react-native-view-shot';
 
 import Timeline from '../Timeline';
-import UpButton from './UpButton';
+import UpButton from './FloatingButton';
 
 const colorTheme = '#FF5FF1';
 

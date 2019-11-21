@@ -10,7 +10,7 @@ import {
   TextInput,
 } from 'react-native';
 import auth from '@react-native-firebase/auth';
-import Wallpaper from './Wallpaper';
+import Wallpaper from '../Wallpaper';
 
 export default function CreateAccount({navigation}) {
   const [email, setEmail] = useState('');

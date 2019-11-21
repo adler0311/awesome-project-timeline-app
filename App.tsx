@@ -2,10 +2,10 @@ import React from 'react';
 import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 
 import Loading from './src/components/Loading';
-import LoginScreen from './src/components/LoginScreen';
+import LoginScreen from './src/components/login/LoginScreen';
 import Main from './src/components/Main';
-import CreateAccount from './src/components/CreateAccount';
-import ForgotPassword from './src/components/ForgotPassword';
+import CreateAccount from './src/components/login/CreateAccount';
+import ForgotPassword from './src/components/login/ForgotPassword';
 import AddEventScreen from './src/components/AddEventScreen';
 
 const App = createSwitchNavigator(

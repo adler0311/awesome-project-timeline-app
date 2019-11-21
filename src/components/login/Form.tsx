@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 
-import UserInput from './UserInput';
+import UserInput from '../UserInput';
 
 import usernameImg from '../images/username.png';
 import passwordImg from '../images/password.png';

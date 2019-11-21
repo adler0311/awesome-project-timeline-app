@@ -2,16 +2,16 @@ import React from 'react';
 import {TouchableOpacity, StyleSheet} from 'react-native';
 import {Icon} from 'native-base';
 
-const UpButton = ({upButtonHandler, backgroundColor}) => (
+const FloatingButton = ({upButtonHandler, backgroundColor}) => (
   <TouchableOpacity
     onPress={upButtonHandler}
-    style={[styles.upButton, {backgroundColor}]}>
+    style={[styles.floatingButton, {backgroundColor}]}>
     <Icon name="ios-add" />
   </TouchableOpacity>
 );
 
 const styles = StyleSheet.create({
-  upButton: {
+  floatingButton: {
     position: 'absolute',
     width: 48,
     height: 48,
@@ -24,4 +24,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default UpButton;
+export default FloatingButton;

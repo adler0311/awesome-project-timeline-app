@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import {StyleSheet, View, TextInput, Text} from 'react-native';
 import Logo from './Logo';
 import Form from './Form';
-import Wallpaper from './Wallpaper';
-import ButtonSubmit from './ButtonSubmit';
+import Wallpaper from '../Wallpaper';
+import ButtonSubmit from '../ButtonSubmit';
 import SignupSection from './SignupSection';
 
 export default function LoginScreen({navigation}) {

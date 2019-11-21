@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
-import UserInput from './UserInput';
+import UserInput from '../UserInput';
 import auth from '@react-native-firebase/auth';
-import Wallpaper from './Wallpaper';
+import Wallpaper from '../Wallpaper';
 
 import usernameImg from '../images/username.png';
 
