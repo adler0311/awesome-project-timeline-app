@@ -23,7 +23,6 @@ const AddEventScreen = ({navigation, onPut}) => {
   const [show, setShow] = useState(false);
 
   const handleDonePress = () => {
-    console.log(title, description, date);
     onPut({title, description, date});
     navigation.navigate('Main');
   };

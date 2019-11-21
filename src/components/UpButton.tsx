@@ -13,8 +13,8 @@ const UpButton = ({upButtonHandler, backgroundColor}) => (
 const styles = StyleSheet.create({
   upButton: {
     position: 'absolute',
-    width: 56,
-    height: 56,
+    width: 48,
+    height: 48,
     alignItems: 'center',
     justifyContent: 'center',
     right: 20,
