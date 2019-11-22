@@ -1,20 +1,20 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import {Text, View, Button, StyleSheet, TouchableOpacity} from 'react-native';
 import auth from '@react-native-firebase/auth';
 import {inject, observer} from 'mobx-react';
-import ViewShot, {captureScreen} from 'react-native-view-shot';
+import {captureScreen} from 'react-native-view-shot';
 
-import Timeline from '../Timeline';
-import UpButton from './FloatingButton';
+import Timeline from '../../Timeline';
+import FloatingButton from './FloatingButton';
 
 const colorTheme = '#FF5FF1';
 
-const Main = ({navigation, events}) => {
-  const onEventPress = () => {
-    alert('!!!');
+const MyTimeline = ({navigation, events}) => {
+  const onEventPress = event => {
+    navigation.navigate('EventDetail', {event});
   };
 
-  const upButtonHandler = () => {
+  const floatingButtonHandler = () => {
     navigation.navigate('AddEventScreen');
   };
 
@@ -69,9 +69,9 @@ const Main = ({navigation, events}) => {
           descriptionStyle={{color: 'black'}}
           lineColor={colorTheme}
         />
-        <UpButton
+        <FloatingButton
           backgroundColor={colorTheme}
-          upButtonHandler={upButtonHandler}
+          upButtonHandler={floatingButtonHandler}
         />
       </View>
 
@@ -92,4 +92,4 @@ const styles = StyleSheet.create({
 
 export default inject(({eventStore}) => ({
   events: eventStore.dateConvertedEvents,
-}))(observer(Main));
+}))(observer(MyTimeline));

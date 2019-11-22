@@ -1,14 +1,6 @@
 import React, {useState} from 'react';
 import Form from './Form';
-import {
-  Text,
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  KeyboardAvoidingView,
-  Image,
-  TextInput,
-} from 'react-native';
+import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 import auth from '@react-native-firebase/auth';
 import Wallpaper from '../Wallpaper';
 

@@ -1,10 +1,9 @@
-import React, {useEffect} from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import React from 'react';
+import {StyleSheet, View} from 'react-native';
 
 import UserInput from '../UserInput';
-
-import usernameImg from '../images/username.png';
-import passwordImg from '../images/password.png';
+import usernameImg from '../../images/username.png';
+import passwordImg from '../../images/password.png';
 
 export default function Form({setEmail, setPassword}) {
   return (

@@ -5,7 +5,7 @@ import auth from '@react-native-firebase/auth';
 export default function Loading({navigation}) {
   useEffect(() => {
     auth().onAuthStateChanged(user => {
-      navigation.navigate(user ? 'Main' : 'LoginScreen'); // 해당 네비게이션이 없으면 아무런 동작을 하지 않는다.
+      navigation.navigate(user ? 'MainScreen' : 'LoginScreen'); // 해당 네비게이션이 없으면 아무런 동작을 하지 않는다.
     });
   }, []);
 

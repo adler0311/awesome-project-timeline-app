@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, TextInput, Text} from 'react-native';
+import {StyleSheet, View} from 'react-native';
+
 import Logo from './Logo';
 import Form from './Form';
 import Wallpaper from '../Wallpaper';

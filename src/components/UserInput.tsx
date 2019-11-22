@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  StyleSheet,
-  View,
-  TextInput,
-  Image,
-  Dimensions,
-  Text,
-} from 'react-native';
+import {StyleSheet, View, TextInput, Image, Dimensions} from 'react-native';
 
 type PropUserInput = {
   source: number;

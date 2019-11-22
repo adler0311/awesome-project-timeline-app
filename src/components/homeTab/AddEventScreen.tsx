@@ -3,17 +3,15 @@ import {
   View,
   Text,
   StyleSheet,
-  Button,
   KeyboardAvoidingView,
   TouchableOpacity,
-  Keyboard,
 } from 'react-native';
 import {Textarea} from 'native-base';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {inject, observer} from 'mobx-react';
 
-import UserInput from './UserInput';
-import {convertToDateString} from '../utils';
+import UserInput from '../UserInput';
+import {convertToDateString} from '../../utils';
 
 const AddEventScreen = ({navigation, onPut}) => {
   const [title, setTitle] = useState('');
