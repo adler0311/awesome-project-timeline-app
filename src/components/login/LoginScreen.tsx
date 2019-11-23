@@ -15,12 +15,7 @@ export default function LoginScreen({navigation}) {
     <Wallpaper>
       <Logo />
       <View style={{flex: 1}}>
-        <Form
-          setEmail={setEmail}
-          setPassword={setPassword}
-          email={email}
-          password={password}
-        />
+        <Form setEmail={setEmail} setPassword={setPassword} />
         <ButtonSubmit email={email} password={password} />
         <SignupSection navigation={navigation} />
       </View>

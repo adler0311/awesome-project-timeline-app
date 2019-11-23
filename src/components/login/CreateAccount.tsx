@@ -23,11 +23,7 @@ export default function CreateAccount({navigation}) {
           <Text style={styles.titleText}>Create Account</Text>
         </View>
         <View style={styles.buttonContainer}>
-          <Form
-            setEmail={setEmail}
-            setPassword={setPassword}
-            style={{flex: 1}}
-          />
+          <Form setEmail={setEmail} setPassword={setPassword} />
           <TouchableOpacity
             style={styles.button}
             onPress={handleSignUp}

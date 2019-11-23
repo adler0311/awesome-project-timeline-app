@@ -49,6 +49,8 @@ const AddEventScreen = ({navigation, onPut}) => {
         </View>
         <View>
           <UserInput
+            source={null}
+            secureTextEntry={false}
             placeholder="title"
             returnKeyType={'done'}
             autoCapitalize={'none'}

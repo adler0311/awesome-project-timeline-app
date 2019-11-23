@@ -9,6 +9,7 @@ export default function Form({setEmail, setPassword}) {
   return (
     <View behavior="padding" style={styles.container}>
       <UserInput
+        secureTextEntry={false}
         source={usernameImg}
         placeholder="Email"
         autoCapitalize={'none'}

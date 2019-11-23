@@ -18,7 +18,7 @@ const DEVICE_WIDTH = Dimensions.get('window').width;
 const DEVICE_HEIGHT = Dimensions.get('window').height;
 const MARGIN = 40;
 
-export default function ButtonSubmit({email, password, navigation}) {
+export default function ButtonSubmit({email, password}) {
   const [isLoading, setIsLoading] = useState(false);
   const [buttonAnimated] = useState(new Animated.Value(0));
   const [growAnimated] = useState(new Animated.Value(0));
