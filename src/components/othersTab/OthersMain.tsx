@@ -4,6 +4,7 @@ import {Container, Header} from 'native-base';
 import firestore from '@react-native-firebase/firestore';
 
 import UserItem from './UserItem';
+import Wallpaper from '../Wallpaper';
 
 export default function OthersTab({navigation}) {
   const [timelines, setTimelines] = useState([]);
@@ -44,23 +45,28 @@ export default function OthersTab({navigation}) {
   };
 
   return (
-    <Container>
-      <Header style={{alignItems: 'center', justifyContent: 'center'}}>
-        <Text style={{fontSize: 20}}>Others</Text>
+    <Wallpaper>
+      <Header
+        style={{
+          alignItems: 'center',
+          justifyContent: 'center',
+          backgroundColor: 'white',
+        }}>
+        <Text style={{fontSize: 20}}>구경하기</Text>
       </Header>
       <View conetntComponentStyle={styles.container}>
         {timelines.length > 0 ? (
           <FlatList
             // style={{flex: 1}}
             data={timelines}
-            keyExtractor={(item, index) => index.toString()}
+            keyExtractor={(_, index) => index.toString()}
             renderItem={renderItem}
           />
         ) : (
           <Text>there is no user timelines</Text>
         )}
       </View>
-    </Container>
+    </Wallpaper>
   );
 }
 

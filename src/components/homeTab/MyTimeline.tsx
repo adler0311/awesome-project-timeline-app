@@ -1,15 +1,48 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {Text, View, Button, StyleSheet, TouchableOpacity} from 'react-native';
 import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
 import {inject, observer} from 'mobx-react';
 import {captureScreen} from 'react-native-view-shot';
 
 import Timeline from '../../Timeline';
-import FloatingButton from './FloatingButton';
+import FloatingButton from './AddEventButton';
 
 const colorTheme = '#FF5FF1';
 
+type Event = {
+  date: string;
+  description: string;
+  title: string;
+};
+
+type EventSnapshot = {
+  _data: Event;
+};
+
 const MyTimeline = ({navigation, events}) => {
+  const [timeline, setTimeline] = useState([]);
+  const getMyTimeline = async () => {
+    const timeline = [];
+    const myEventsRef = await firestore()
+      .collection('users')
+      .doc('rbxlBStx7GJUbkPvfdaa')
+      .collection('events')
+      .get();
+
+    myEventsRef.docs
+      .map((eventSnapshot: EventSnapshot) => eventSnapshot._data)
+      .map((event: Event) => {
+        timeline.push(event);
+      });
+
+    setTimeline(timeline);
+  };
+
+  useEffect(() => {
+    getMyTimeline();
+  }, []);
+
   const onEventPress = event => {
     navigation.navigate('EventDetail', {event});
   };
@@ -37,7 +70,7 @@ const MyTimeline = ({navigation, events}) => {
           alignItems: 'center',
           marginTop: 30,
         }}>
-        <Text style={{fontSize: 30}}>My Project Timeline</Text>
+        <Text style={{fontSize: 30}}>내 프로젝트 타임라인</Text>
       </View>
       <View style={{padding: 20, alignItems: 'flex-end'}}>
         <TouchableOpacity
@@ -52,12 +85,12 @@ const MyTimeline = ({navigation, events}) => {
             backgroundColor: colorTheme,
             borderColor: 'white',
           }}>
-          <Text style={{color: 'white'}}>get screenshot</Text>
+          <Text style={{color: 'white'}}>화면 캡쳐</Text>
         </TouchableOpacity>
       </View>
       <View style={{flex: 1, marginVertical: 40}}>
         <Timeline
-          data={events}
+          data={timeline}
           onEventPress={onEventPress}
           columnFormat="single-column-left"
           detailContainerStyle={{
@@ -76,7 +109,7 @@ const MyTimeline = ({navigation, events}) => {
       </View>
 
       <Button
-        title="logout"
+        title="로그아웃"
         onPress={() => auth().signOut()}
         color={colorTheme}
       />

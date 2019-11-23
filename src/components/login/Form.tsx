@@ -11,7 +11,7 @@ export default function Form({setEmail, setPassword}) {
       <UserInput
         secureTextEntry={false}
         source={usernameImg}
-        placeholder="Email"
+        placeholder="이메일"
         autoCapitalize={'none'}
         returnKeyType={'done'}
         autoCorrect={false}
@@ -20,7 +20,7 @@ export default function Form({setEmail, setPassword}) {
       <UserInput
         source={passwordImg}
         secureTextEntry={true}
-        placeholder="Password"
+        placeholder="비밀번호"
         returnKeyType={'done'}
         autoCapitalize={'none'}
         autoCorrect={false}

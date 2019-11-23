@@ -24,7 +24,7 @@ export default function UserInput({
     <View style={styles.inputWrapper}>
       <Image source={source} style={styles.inlineImg} />
       <TextInput
-        style={styles.input}
+        style={source ? styles.input : [styles.input, {paddingLeft: 20}]}
         placeholder={placeholder}
         secureTextEntry={secureTextEntry}
         autoCorrect={autoCorrect}
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     height: 40,
     marginHorizontal: 20,
     paddingLeft: 45,
-    borderRadius: 20,
+    borderRadius: 10,
     color: '#ffffff',
   },
   inputWrapper: {

@@ -75,7 +75,7 @@ export default function ButtonSubmit({email, password}) {
           {isLoading ? (
             <Image source={spinner} style={styles.image} />
           ) : (
-            <Text style={styles.text}>LOGIN</Text>
+            <Text style={styles.text}>로그인</Text>
           )}
         </TouchableOpacity>
         <Animated.View

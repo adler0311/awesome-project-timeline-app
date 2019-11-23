@@ -14,10 +14,10 @@ export default function SignupSection({navigation}) {
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={handlePressCreateAccount} transparent>
-        <Text style={styles.text}>Create Account</Text>
+        <Text style={styles.text}>계정 생성</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={handlePressForgotPassword} transparent>
-        <Text style={styles.text}>Forgot Password?</Text>
+        <Text style={styles.text}>비밀번호 찾기</Text>
       </TouchableOpacity>
     </View>
   );
