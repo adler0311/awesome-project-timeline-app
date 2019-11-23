@@ -22,7 +22,7 @@ const AddEventScreen = ({navigation, onPut}) => {
 
   const handleDonePress = () => {
     onPut({title, description, date});
-    navigation.navigate('Main');
+    navigation.navigate('MyTimeline');
   };
 
   const datepicker = () => {
