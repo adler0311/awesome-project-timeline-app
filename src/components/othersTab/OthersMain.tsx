@@ -4,9 +4,9 @@ import {Container, Header} from 'native-base';
 import firestore from '@react-native-firebase/firestore';
 
 import UserItem from './UserItem';
-import Wallpaper from '../Wallpaper';
+import TabHeader from '../TabHeader';
 
-export default function OthersTab({navigation}) {
+const OthersMain = ({navigation}) => {
   const [timelines, setTimelines] = useState([]);
 
   const getTimelines = async () => {
@@ -45,15 +45,8 @@ export default function OthersTab({navigation}) {
   };
 
   return (
-    <Wallpaper>
-      <Header
-        style={{
-          alignItems: 'center',
-          justifyContent: 'center',
-          backgroundColor: 'white',
-        }}>
-        <Text style={{fontSize: 20}}>구경하기</Text>
-      </Header>
+    <Container>
+      <TabHeader navigation={navigation} isMain={true} />
       <View conetntComponentStyle={styles.container}>
         {timelines.length > 0 ? (
           <FlatList
@@ -66,9 +59,17 @@ export default function OthersTab({navigation}) {
           <Text>there is no user timelines</Text>
         )}
       </View>
-    </Wallpaper>
+    </Container>
   );
-}
+};
+
+OthersMain.navigationOptions = {
+  headerTitle: () => (
+    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <Text>구경하기</Text>
+    </View>
+  ),
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -76,3 +77,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+export default OthersMain;

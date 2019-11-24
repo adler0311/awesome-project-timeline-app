@@ -6,7 +6,7 @@ import {
   KeyboardAvoidingView,
   TouchableOpacity,
 } from 'react-native';
-import {Textarea} from 'native-base';
+import {Textarea, Container} from 'native-base';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {inject, observer} from 'mobx-react';
 
@@ -14,6 +14,7 @@ import UserInput from '../UserInput';
 import {convertToDateString} from '../../utils';
 
 import Wallpaper from '../Wallpaper';
+import TabHeader from '../TabHeader';
 
 const AddEventScreen = ({navigation, onPut}) => {
   const [title, setTitle] = useState('');
@@ -38,70 +39,74 @@ const AddEventScreen = ({navigation, onPut}) => {
   };
 
   return (
-    <Wallpaper>
-      <KeyboardAvoidingView style={styles.container}>
-        <View style={{flex: 1, justifyContent: 'flex-end'}}>
-          <View
-            style={{
-              justifyContent: 'center',
-              alignItems: 'center',
-              marginVertical: 30,
-              flex: 1,
-            }}>
-            <Text style={{fontSize: 28, color: 'white'}}>이벤트 추가</Text>
-          </View>
-          <View>
-            <UserInput
-              source={null}
-              secureTextEntry={false}
-              placeholder="타이틀"
-              returnKeyType={'done'}
-              autoCapitalize={'none'}
-              autoCorrect={false}
-              onChangeText={setTitle}
-            />
-            <Textarea
-              rowSpan={5}
-              placeholder="설명"
-              placeholderTextColor="white"
-              style={styles.textArea}
-              value={description}
-              onChangeText={setDescription}
-            />
-          </View>
-          <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-around',
-            }}>
-            <TouchableOpacity
-              onPress={datepicker}
-              style={[
-                styles.button,
-                {paddingHorizontal: 30, marginHorizontal: 0},
-              ]}>
-              <Text style={{color: 'white'}}>날짜 선택</Text>
-            </TouchableOpacity>
+    <Container>
+      <TabHeader />
+      <Wallpaper>
+        <KeyboardAvoidingView style={styles.container}>
+          <View style={{flex: 1}}>
+            <View
+              style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+                marginVertical: 30,
+                flex: 1,
+              }}>
+              <Text style={{fontSize: 28, color: 'white'}}>이벤트 추가</Text>
+            </View>
+            <View>
+              <UserInput
+                source={null}
+                secureTextEntry={false}
+                placeholder="타이틀"
+                returnKeyType={'done'}
+                autoCapitalize={'none'}
+                autoCorrect={false}
+                onChangeText={setTitle}
+              />
+              <Textarea
+                rowSpan={5}
+                placeholder="설명"
+                placeholderTextColor="white"
+                style={styles.textArea}
+                value={description}
+                onChangeText={setDescription}
+              />
+            </View>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-around',
+              }}>
+              <TouchableOpacity
+                onPress={datepicker}
+                style={[
+                  styles.button,
+                  {paddingHorizontal: 30, marginHorizontal: 0},
+                ]}>
+                <Text style={{color: 'white'}}>날짜 선택</Text>
+              </TouchableOpacity>
 
-            <Text style={{color: 'white'}}>{convertToDateString(date)}</Text>
+              <Text style={{color: 'white', fontSize: 16}}>
+                {convertToDateString(date)}
+              </Text>
+            </View>
+            {show && (
+              <DateTimePicker
+                value={date}
+                mode={'date'}
+                is24Hour={true}
+                display="default"
+                onChange={handleDateTimePickerChange}
+              />
+            )}
+            <TouchableOpacity style={styles.button} onPress={handleDonePress}>
+              <Text style={{color: 'white', fontSize: 16}}>추가</Text>
+            </TouchableOpacity>
           </View>
-          {show && (
-            <DateTimePicker
-              value={date}
-              mode={'date'}
-              is24Hour={true}
-              display="default"
-              onChange={handleDateTimePickerChange}
-            />
-          )}
-          <TouchableOpacity style={styles.button} onPress={handleDonePress}>
-            <Text style={{color: 'white'}}>DONE</Text>
-          </TouchableOpacity>
-          <View style={{flex: 1}}></View>
-        </View>
-      </KeyboardAvoidingView>
-    </Wallpaper>
+        </KeyboardAvoidingView>
+      </Wallpaper>
+    </Container>
   );
 };
 
@@ -126,7 +131,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 30,
     borderRadius: 10,
     borderColor: 'white',
-    height: 30,
+    height: 40,
   },
 });
 

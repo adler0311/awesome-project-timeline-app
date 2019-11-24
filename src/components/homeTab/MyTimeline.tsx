@@ -1,12 +1,13 @@
 import React, {useState, useEffect} from 'react';
-import {Text, View, Button, StyleSheet, TouchableOpacity} from 'react-native';
-import auth from '@react-native-firebase/auth';
+import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import {inject, observer} from 'mobx-react';
 import {captureScreen} from 'react-native-view-shot';
 
 import Timeline from '../../Timeline';
 import FloatingButton from './AddEventButton';
+import {Container} from 'native-base';
+import TabHeader from '../TabHeader';
 
 const colorTheme = '#FF5FF1';
 
@@ -63,39 +64,21 @@ const MyTimeline = ({navigation, events}) => {
   };
 
   return (
-    <View style={styles.container}>
-      <View
-        style={{
-          justifyContent: 'center',
-          alignItems: 'center',
-          marginTop: 30,
-        }}>
-        <Text style={{fontSize: 30}}>내 프로젝트 타임라인</Text>
-      </View>
+    <Container style={styles.container}>
+      <TabHeader isMain={true} />
       <View style={{padding: 20, alignItems: 'flex-end'}}>
-        <TouchableOpacity
-          onPress={onCapture}
-          style={{
-            borderWidth: 1,
-            width: 120,
-            padding: 5,
-            justifyContent: 'center',
-            alignItems: 'center',
-            borderRadius: 10,
-            backgroundColor: colorTheme,
-            borderColor: 'white',
-          }}>
+        <TouchableOpacity onPress={onCapture} style={styles.captureButton}>
           <Text style={{color: 'white'}}>화면 캡쳐</Text>
         </TouchableOpacity>
       </View>
-      <View style={{flex: 1, marginVertical: 40}}>
+      <View style={{flex: 1, marginBottom: 20}}>
         <Timeline
           data={timeline}
           onEventPress={onEventPress}
           columnFormat="single-column-left"
           detailContainerStyle={{
             padding: 10,
-            marginVertical: 20,
+            marginVertical: 15,
           }}
           titleStyle={{color: colorTheme}}
           // separator={true}
@@ -107,19 +90,23 @@ const MyTimeline = ({navigation, events}) => {
           upButtonHandler={floatingButtonHandler}
         />
       </View>
-
-      <Button
-        title="로그아웃"
-        onPress={() => auth().signOut()}
-        color={colorTheme}
-      />
-    </View>
+    </Container>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  captureButton: {
+    borderWidth: 1,
+    width: 120,
+    padding: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+    backgroundColor: colorTheme,
+    borderColor: 'white',
   },
 });
 

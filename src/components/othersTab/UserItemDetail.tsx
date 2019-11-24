@@ -1,7 +1,8 @@
 import React from 'react';
 import Timeline from '../../Timeline';
 import {View, Text} from 'react-native';
-import {Icon} from 'native-base';
+import {Icon, Container} from 'native-base';
+import TabHeader from '../TabHeader';
 
 const colorTheme = '#FF5FF1';
 
@@ -13,7 +14,8 @@ export default function UserItemDetail({navigation}) {
   };
 
   return (
-    <>
+    <Container>
+      <TabHeader navigation={navigation} />
       <View
         style={{
           flex: 0.1,
@@ -55,6 +57,6 @@ export default function UserItemDetail({navigation}) {
         descriptionStyle={{color: 'black'}}
         lineColor={colorTheme}
       />
-    </>
+    </Container>
   );
 }

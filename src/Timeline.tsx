@@ -27,7 +27,6 @@ const Timeline = ({
   descriptionStyle,
   separator,
   separatorStyle,
-  lineWidth = 2,
   circleSize = 70,
   circleColor = '#007AFF',
   lineColor = 'black',
@@ -120,8 +119,6 @@ const Timeline = ({
   };
 
   const renderEvent = (rowData, rowID) => {
-    lineWidth = rowData.lineWidth ? rowData.lineWidth : lineWidth;
-
     const isLast = renderFullLine
       ? renderFullLine
       : data.slice(-1)[0] === rowData;
@@ -137,7 +134,7 @@ const Timeline = ({
       case 'single-column-left':
         opStyle = {
           borderColor: lineColor,
-          borderLeftWidth: lineWidth,
+          borderLeftWidth: 2,
           borderRightWidth: 0,
           right: 30,
           paddingLeft: 80,
