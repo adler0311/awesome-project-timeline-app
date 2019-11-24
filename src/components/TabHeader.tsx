@@ -1,13 +1,15 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {Text} from 'react-native';
 import {Left, Header, Right, Body} from 'native-base';
 import {Icon} from 'native-base';
 import auth from '@react-native-firebase/auth';
-import {withNavigation} from 'react-navigation';
 
 const colorTheme = '#FF5FF1';
 
 const TabHeader = ({title, navigation, isMain = false}) => {
+  const handlePress = () => {
+    navigation.goBack();
+  };
   return (
     <Header
       style={{
@@ -16,7 +18,7 @@ const TabHeader = ({title, navigation, isMain = false}) => {
       }}>
       {isMain ? null : (
         <Left style={{flex: 1, marginLeft: 20}}>
-          <Icon name="md-arrow-back" onPress={() => navigation.goBack()} />
+          <Icon name="md-arrow-back" onPress={handlePress} />
         </Left>
       )}
       <Body>
@@ -34,4 +36,4 @@ const TabHeader = ({title, navigation, isMain = false}) => {
   );
 };
 
-export default withNavigation(TabHeader);
+export default TabHeader;

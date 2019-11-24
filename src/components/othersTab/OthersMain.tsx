@@ -5,53 +5,57 @@ import firestore from '@react-native-firebase/firestore';
 
 import UserItem from './UserItem';
 import TabHeader from '../TabHeader';
+import {inject} from 'mobx-react';
+import {observer} from 'mobx-react-lite';
 
-const OthersMain = ({navigation}) => {
-  const [timelines, setTimelines] = useState([]);
+const OthersMain = ({navigation, getUsers, users}) => {
+  // const getTimelines = async () => {
+  //   const timelines = [];
 
-  const getTimelines = async () => {
-    const timelines = [];
+  //   const usersRef = await firestore()
+  //     .collection('users')
+  //     .get();
 
-    const usersRef = await firestore()
-      .collection('users')
-      .get();
+  //   let user;
+  //   for (user of usersRef.docs) {
+  //     const {username, position, year} = user._data;
+  //     const timeline = {uid: user.id, events: [], username, position, year};
+  //     const eventsRef = await firestore()
+  //       .collection('users')
+  //       .doc(user.id)
+  //       .collection('events')
+  //       .get();
 
-    let user;
-    for (user of usersRef.docs) {
-      const {username, position, year} = user._data;
-      const timeline = {uid: user.id, events: [], username, position, year};
-      const eventsRef = await firestore()
-        .collection('users')
-        .doc(user.id)
-        .collection('events')
-        .get();
+  //     let event;
+  //     for (event of eventsRef.docs) {
+  //       timeline.events.push(event._data);
+  //     }
+  //     timelines.push(timeline);
+  //   }
 
-      let event;
-      for (event of eventsRef.docs) {
-        timeline.events.push(event._data);
-      }
-      timelines.push(timeline);
-    }
+  //   setTimelines(timelines);
+  // };
 
-    setTimelines(timelines);
+  const _getUsers = async () => {
+    await getUsers();
   };
 
   useEffect(() => {
-    getTimelines();
+    _getUsers();
   }, []);
 
-  const renderItem = ({item}) => {
-    return <UserItem item={item} navigation={navigation} />;
+  const renderItem = ({item: user}) => {
+    return <UserItem user={user} navigation={navigation} />;
   };
 
   return (
     <Container>
       <TabHeader navigation={navigation} isMain={true} />
       <View conetntComponentStyle={styles.container}>
-        {timelines.length > 0 ? (
+        {users.length > 0 ? (
           <FlatList
             // style={{flex: 1}}
-            data={timelines}
+            data={users}
             keyExtractor={(_, index) => index.toString()}
             renderItem={renderItem}
           />
@@ -78,4 +82,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default OthersMain;
+export default inject(({userStore}) => ({
+  getUsers: userStore.getUsers,
+  users: userStore.users,
+}))(observer(OthersMain));

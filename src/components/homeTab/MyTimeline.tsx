@@ -1,6 +1,5 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
-import firestore from '@react-native-firebase/firestore';
 import {inject, observer} from 'mobx-react';
 import {captureScreen} from 'react-native-view-shot';
 
@@ -11,37 +10,13 @@ import TabHeader from '../TabHeader';
 
 const colorTheme = '#FF5FF1';
 
-type Event = {
-  date: string;
-  description: string;
-  title: string;
-};
-
-type EventSnapshot = {
-  _data: Event;
-};
-
-const MyTimeline = ({navigation, events}) => {
-  const [timeline, setTimeline] = useState([]);
-  const getMyTimeline = async () => {
-    const timeline = [];
-    const myEventsRef = await firestore()
-      .collection('users')
-      .doc('rbxlBStx7GJUbkPvfdaa')
-      .collection('events')
-      .get();
-
-    myEventsRef.docs
-      .map((eventSnapshot: EventSnapshot) => eventSnapshot._data)
-      .map((event: Event) => {
-        timeline.push(event);
-      });
-
-    setTimeline(timeline);
+const MyTimeline = ({navigation, fetchMyEvents, timeline}) => {
+  const _fetchMyEvents = async () => {
+    await fetchMyEvents();
   };
 
   useEffect(() => {
-    getMyTimeline();
+    _fetchMyEvents();
   }, []);
 
   const onEventPress = event => {
@@ -111,5 +86,6 @@ const styles = StyleSheet.create({
 });
 
 export default inject(({eventStore}) => ({
-  events: eventStore.dateConvertedEvents,
+  fetchMyEvents: eventStore.fetchMyEvents,
+  timeline: eventStore.events,
 }))(observer(MyTimeline));

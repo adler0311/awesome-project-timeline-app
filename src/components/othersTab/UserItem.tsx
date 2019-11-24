@@ -2,9 +2,9 @@ import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import {Icon} from 'native-base';
 
-export default function UserItem({item, navigation}) {
+const UserItem = ({user, navigation}) => {
   const handlePress = () => {
-    navigation.navigate('UserItemDetail', {userData: item});
+    navigation.navigate('UserItemDetail', {userData: user});
   };
 
   return (
@@ -22,15 +22,17 @@ export default function UserItem({item, navigation}) {
       </View>
       <View style={{flex: 4}}>
         <View>
-          <Text>{item.username}</Text>
+          <Text>{user.username}</Text>
         </View>
         <View>
-          <Text>{item.position}</Text>
+          <Text>{user.position}</Text>
         </View>
         <View>
-          <Text>{item.year}년차</Text>
+          <Text>{user.year}년차</Text>
         </View>
       </View>
     </TouchableOpacity>
   );
-}
+};
+
+export default UserItem;

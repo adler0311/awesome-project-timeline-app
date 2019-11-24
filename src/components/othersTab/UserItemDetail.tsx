@@ -1,13 +1,24 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import Timeline from '../../Timeline';
 import {View, Text} from 'react-native';
 import {Icon, Container} from 'native-base';
 import TabHeader from '../TabHeader';
+import {inject, observer} from 'mobx-react';
 
 const colorTheme = '#FF5FF1';
 
-export default function UserItemDetail({navigation}) {
+const UserItemDetail = ({navigation, timeline, fetchMyEvents, clearEvents}) => {
   const userData = navigation.getParam('userData');
+  const [isLoading, setIsLoading] = useState(true);
+
+  const _fetchEvent = async () => {
+    await fetchMyEvents(userData.id);
+    setIsLoading(false);
+  };
+
+  useEffect(() => {
+    _fetchEvent();
+  }, []);
 
   const onEventPress = data => {
     navigation.navigate('EventDetail', {event: data});
@@ -45,18 +56,30 @@ export default function UserItemDetail({navigation}) {
           </View>
         </View>
       </View>
-      <Timeline
-        data={userData.events}
-        onEventPress={onEventPress}
-        columnFormat="single-column-left"
-        detailContainerStyle={{
-          padding: 10,
-          marginVertical: 20,
-        }}
-        titleStyle={{color: colorTheme}}
-        descriptionStyle={{color: 'black'}}
-        lineColor={colorTheme}
-      />
+      {!isLoading ? (
+        <Timeline
+          data={timeline}
+          onEventPress={onEventPress}
+          columnFormat="single-column-left"
+          detailContainerStyle={{
+            padding: 10,
+            marginVertical: 20,
+          }}
+          titleStyle={{color: colorTheme}}
+          descriptionStyle={{color: 'black'}}
+          lineColor={colorTheme}
+        />
+      ) : (
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+          <Text>Waiting...</Text>
+        </View>
+      )}
     </Container>
   );
-}
+};
+
+export default inject(({eventStore}) => ({
+  fetchMyEvents: eventStore.fetchMyEvents,
+  timeline: eventStore.events,
+  clearEvents: eventStore.clearEvents,
+}))(observer(UserItemDetail));
