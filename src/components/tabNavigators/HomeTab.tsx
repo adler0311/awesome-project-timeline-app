@@ -7,8 +7,6 @@ import MyTimeline from '../homeTab/MyTimeline';
 import AddEventScreen from '../homeTab/AddEventScreen';
 import EventDetail from '../EventDetail';
 
-const colorTheme = '#FF5FF1';
-
 const HomeTab = createAppContainer(
   createStackNavigator(
     {

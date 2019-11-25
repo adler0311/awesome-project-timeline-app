@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
+import {createAppContainer} from 'react-navigation';
+import {createStackNavigator} from 'react-navigation-stack';
 
 import Logo from './Logo';
 import Form from './Form';
@@ -7,7 +9,10 @@ import Wallpaper from '../Wallpaper';
 import ButtonSubmit from '../ButtonSubmit';
 import SignupSection from './SignupSection';
 
-export default function LoginScreen({navigation}) {
+import ForgotPassword from './ForgotPassword';
+import CreateAccount from './CreateAccount';
+
+const Login = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -21,6 +26,20 @@ export default function LoginScreen({navigation}) {
       </View>
     </Wallpaper>
   );
-}
+};
 
-const styles = StyleSheet.create({});
+const LoginScreen = createAppContainer(
+  createStackNavigator(
+    {
+      Login,
+      ForgotPassword,
+      CreateAccount,
+    },
+    {
+      defaultNavigationOptions: {
+        header: null,
+      },
+    },
+  ),
+);
+export default LoginScreen;

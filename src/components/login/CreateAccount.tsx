@@ -3,32 +3,51 @@ import Form from './Form';
 import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 import auth from '@react-native-firebase/auth';
 import Wallpaper from '../Wallpaper';
+import TabHeader from '../TabHeader';
 
 export default function CreateAccount({navigation}) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSignUp = () => {
-    console.log('handle sign up');
+    if (email.length === 0 || password.length === 0) return;
+
     auth()
       .createUserWithEmailAndPassword(email, password)
       .then(() => navigation.navigate('Main'))
-      .catch(error => console.error(error)); // 로그인이 성공하면 resolve되는 듯 하다.
+      .catch(error => {
+        if (error.toString().indexOf('email-already-in-use')) {
+          alert('이미 사용중인 이메일 입니다.');
+        } else {
+          console.error(error);
+        }
+      });
   };
 
   return (
     <Wallpaper>
+      <TabHeader />
       <View style={{flex: 1}}>
         <View style={styles.titleContainer}>
-          <Text style={styles.titleText}>Create Account</Text>
+          <Text style={styles.titleText}>계정 생성</Text>
         </View>
         <View style={styles.buttonContainer}>
           <Form setEmail={setEmail} setPassword={setPassword} />
           <TouchableOpacity
-            style={styles.button}
-            onPress={handleSignUp}
-            activeOpacity={1}>
-            <Text style={styles.text}>SIGNUP</Text>
+            style={
+              email.length > 0 && password.length > 0
+                ? styles.button
+                : styles.buttonDisabled
+            }
+            onPress={handleSignUp}>
+            <Text
+              style={
+                email.length > 0 && password.length > 0
+                  ? styles.buttonText
+                  : styles.buttonTextDisabled
+              }>
+              가입하기
+            </Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -54,18 +73,32 @@ const styles = StyleSheet.create({
   button: {
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#F035E0',
+    backgroundColor: 'rgba(240, 53, 224, 1)',
     height: MARGIN,
     borderRadius: 20,
     zIndex: 100,
     marginHorizontal: 20,
     marginTop: 20,
   },
+  buttonDisabled: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgba(240, 53, 224, 0.2)',
+    height: MARGIN,
+    borderRadius: 20,
+    zIndex: 100,
+    marginHorizontal: 20,
+    marginTop: 20,
+  },
+
   input: {
     borderBottomWidth: 1,
     marginHorizontal: 20,
   },
-  text: {
+  buttonText: {
     color: 'white',
+  },
+  buttonTextDisabled: {
+    color: 'rgba(255,255,255,0.2)',
   },
 });

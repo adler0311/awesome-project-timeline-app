@@ -15,7 +15,6 @@ import auth from '@react-native-firebase/auth';
 import spinner from '../images/loading.gif';
 
 const DEVICE_WIDTH = Dimensions.get('window').width;
-const DEVICE_HEIGHT = Dimensions.get('window').height;
 const MARGIN = 40;
 
 export default function ButtonSubmit({email, password}) {
@@ -31,8 +30,8 @@ export default function ButtonSubmit({email, password}) {
   };
 
   const _onPress = () => {
+    if (email.length === 0 && password.length === 0) return;
     if (isLoading) return;
-
     setIsLoading(true);
 
     Animated.timing(buttonAnimated, {
@@ -69,13 +68,24 @@ export default function ButtonSubmit({email, password}) {
           }),
         }}>
         <TouchableOpacity
-          style={styles.button}
+          style={
+            email.length > 0 && password.length > 0
+              ? styles.button
+              : styles.buttonDisabled
+          }
           onPress={_onPress}
           activeOpacity={1}>
           {isLoading ? (
             <Image source={spinner} style={styles.image} />
           ) : (
-            <Text style={styles.text}>로그인</Text>
+            <Text
+              style={
+                email.length > 0 && password.length > 0
+                  ? styles.buttonText
+                  : styles.buttonTextDisabled
+              }>
+              로그인
+            </Text>
           )}
         </TouchableOpacity>
         <Animated.View
@@ -108,12 +118,31 @@ const styles = StyleSheet.create({
   button: {
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#F035E0',
+    backgroundColor: 'rgba(240, 53, 224, 1)',
+    height: MARGIN,
+    borderRadius: 20,
+    zIndex: 100,
+  },
+  buttonDisabled: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgba(240, 53, 224, 0.2)',
     height: MARGIN,
     borderRadius: 20,
     zIndex: 100,
   },
   circle: {
+    height: MARGIN,
+    width: MARGIN,
+    marginTop: -MARGIN,
+    borderWidth: 1,
+    borderColor: 'rgba(240, 53, 224, 0)',
+    borderRadius: 100,
+    alignSelf: 'center',
+    zIndex: 99,
+    backgroundColor: 'rgba(240, 53, 224, 0)',
+  },
+  circleDisabled: {
     height: MARGIN,
     width: MARGIN,
     marginTop: -MARGIN,
@@ -124,10 +153,15 @@ const styles = StyleSheet.create({
     zIndex: 99,
     backgroundColor: '#F035E0',
   },
-  text: {
-    color: 'white',
+  buttonText: {
+    color: 'rgba(255,255,255, 1)',
     backgroundColor: 'transparent',
   },
+  buttonTextDisabled: {
+    color: 'rgba(255,255,255, 0.2)',
+    backgroundColor: 'transparent',
+  },
+
   image: {
     width: 24,
     height: 24,

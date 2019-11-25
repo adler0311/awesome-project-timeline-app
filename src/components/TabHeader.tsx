@@ -3,6 +3,7 @@ import {Text} from 'react-native';
 import {Left, Header, Right, Body} from 'native-base';
 import {Icon} from 'native-base';
 import auth from '@react-native-firebase/auth';
+import {withNavigation} from 'react-navigation';
 
 const colorTheme = '#FF5FF1';
 
@@ -36,4 +37,4 @@ const TabHeader = ({title, navigation, isMain = false}) => {
   );
 };
 
-export default TabHeader;
+export default withNavigation(TabHeader);
