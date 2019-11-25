@@ -37,6 +37,9 @@ const AddEventScreen = ({navigation, onPut}) => {
   };
 
   const handleDonePress = () => {
+    if (!(title && description)) {
+    }
+
     onPut({title, description, date});
     navigation.navigate('MyTimeline');
   };

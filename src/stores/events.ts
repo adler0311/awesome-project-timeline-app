@@ -5,7 +5,7 @@ import firestore from '@react-native-firebase/firestore';
 type Event = {
   title: string;
   description: string;
-  date: Date;
+  date: FirestoreDate;
 };
 
 type EventSnapshot = {
@@ -50,7 +50,7 @@ export default class EventStore {
     myEventsRef.docs
       .map((eventSnapshot: EventSnapshot) => eventSnapshot._data)
       .map((event: Event) => {
-        timeline.push(event);
+        timeline.push({...event, date: event.date.toDate()});
       });
 
     runInAction(() => {
@@ -64,6 +64,10 @@ export default class EventStore {
   @computed
   get dateConvertedEvents() {
     if (this.events.length === 0) return this.events;
+    // console.log(new Date());
+    // this.events.map(event => {
+    //   console.log(event.date);
+    // });
     return this.events.map(event => ({
       ...event,
       date: convertToDateString(event.date),

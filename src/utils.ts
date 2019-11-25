@@ -1,6 +1,7 @@
 // Thu Nov 21 2019
 export const convertToDateString = (dateObject: Date) => {
-  console.log(dateObject);
+  if (!dateObject) return '';
+
   const year = dateObject.getFullYear();
   const month = dateObject.getMonth() + 1;
   const day = dateObject.getDate();

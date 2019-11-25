@@ -87,5 +87,5 @@ const styles = StyleSheet.create({
 
 export default inject(({eventStore}) => ({
   fetchMyEvents: eventStore.fetchMyEvents,
-  timeline: eventStore.events,
+  timeline: eventStore.dateConvertedEvents,
 }))(observer(MyTimeline));
