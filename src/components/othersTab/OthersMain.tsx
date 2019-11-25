@@ -54,13 +54,12 @@ const OthersMain = ({navigation, getUsers, users}) => {
       <View conetntComponentStyle={styles.container}>
         {users.length > 0 ? (
           <FlatList
-            // style={{flex: 1}}
             data={users}
             keyExtractor={(_, index) => index.toString()}
             renderItem={renderItem}
           />
         ) : (
-          <Text>there is no user timelines</Text>
+          <Text>아직 타임라인이 없어요😂</Text>
         )}
       </View>
     </Container>

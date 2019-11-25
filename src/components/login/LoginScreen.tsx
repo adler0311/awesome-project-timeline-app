@@ -11,7 +11,6 @@ import SignupSection from './SignupSection';
 
 import ForgotPassword from './ForgotPassword';
 import CreateAccount from './CreateAccount';
-import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 
 const Login = ({navigation}) => {
   const [email, setEmail] = useState('');

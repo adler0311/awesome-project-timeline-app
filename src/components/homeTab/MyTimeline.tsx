@@ -7,16 +7,22 @@ import Timeline from '../../Timeline';
 import FloatingButton from './AddEventButton';
 import {Container} from 'native-base';
 import TabHeader from '../TabHeader';
+import {colorTheme} from '../../theme';
 
-const colorTheme = '#FF5FF1';
+import auth from '@react-native-firebase/auth';
 
-const MyTimeline = ({navigation, fetchMyEvents, timeline}) => {
-  const _fetchMyEvents = async () => {
-    await fetchMyEvents();
+type CurrentUser = {
+  email: string;
+  uid: string;
+};
+
+const MyTimeline = ({navigation, fetchEvents, timeline}) => {
+  const _fetchEvents = async () => {
+    await fetchEvents(auth().currentUser.uid);
   };
 
   useEffect(() => {
-    _fetchMyEvents();
+    _fetchEvents();
   }, []);
 
   const onEventPress = event => {
@@ -38,6 +44,20 @@ const MyTimeline = ({navigation, fetchMyEvents, timeline}) => {
     );
   };
 
+  const renderTimeline = () => (
+    <Timeline
+      data={timeline}
+      onEventPress={onEventPress}
+      detailContainerStyle={{
+        padding: 10,
+        marginVertical: 15,
+      }}
+      titleStyle={{color: colorTheme}}
+      // separator={true}
+      lineColor={colorTheme}
+    />
+  );
+
   return (
     <Container style={styles.container}>
       <TabHeader isMain={true} />
@@ -47,19 +67,14 @@ const MyTimeline = ({navigation, fetchMyEvents, timeline}) => {
         </TouchableOpacity>
       </View>
       <View style={{flex: 1, marginBottom: 20}}>
-        <Timeline
-          data={timeline}
-          onEventPress={onEventPress}
-          columnFormat="single-column-left"
-          detailContainerStyle={{
-            padding: 10,
-            marginVertical: 15,
-          }}
-          titleStyle={{color: colorTheme}}
-          // separator={true}
-          descriptionStyle={{color: 'black'}}
-          lineColor={colorTheme}
-        />
+        {timeline.length === 0 ? (
+          <View
+            style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+            <Text>아직 이벤트가 없습니다. 추가해보세요!</Text>
+          </View>
+        ) : (
+          renderTimeline()
+        )}
         <FloatingButton
           backgroundColor={colorTheme}
           upButtonHandler={floatingButtonHandler}
@@ -86,6 +101,6 @@ const styles = StyleSheet.create({
 });
 
 export default inject(({eventStore}) => ({
-  fetchMyEvents: eventStore.fetchMyEvents,
+  fetchEvents: eventStore.fetchMyEvents,
   timeline: eventStore.dateConvertedEvents,
 }))(observer(MyTimeline));

@@ -2,8 +2,18 @@ import React, {useState} from 'react';
 import Form from './Form';
 import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
 import Wallpaper from '../Wallpaper';
 import TabHeader from '../TabHeader';
+
+type FirebaseUser = {
+  email: string;
+  uid: string;
+};
+
+type CreateUserResponse = {
+  user: FirebaseUser;
+};
 
 export default function CreateAccount({navigation}) {
   const [email, setEmail] = useState('');
@@ -14,7 +24,21 @@ export default function CreateAccount({navigation}) {
 
     auth()
       .createUserWithEmailAndPassword(email, password)
-      .then(() => navigation.navigate('Main'))
+      .then((response: CreateUserResponse) => {
+        console.log(response.user);
+        return response.user;
+      })
+      .then((user: FirebaseUser) => {
+        firestore()
+          .collection('users')
+          .doc(user.uid)
+          .set({
+            position: '웹 개발',
+            year: 1,
+            email: user.email,
+          });
+      })
+
       .catch(error => {
         if (error.toString().indexOf('email-already-in-use')) {
           alert('이미 사용중인 이메일 입니다.');

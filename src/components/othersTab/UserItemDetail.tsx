@@ -41,7 +41,7 @@ const UserItemDetail = ({navigation, timeline, fetchMyEvents, clearEvents}) => {
         </View>
         <View style={{flex: 4}}>
           <View style={{marginBottom: 10}}>
-            <Text>{userData.username}</Text>
+            <Text>{userData.email}</Text>
           </View>
           <View
             style={{

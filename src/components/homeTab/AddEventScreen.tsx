@@ -13,13 +13,13 @@ import {Textarea, Container} from 'native-base';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {inject, observer} from 'mobx-react';
 import ImagePicker from 'react-native-image-picker';
+import auth from '@react-native-firebase/auth';
 
 import UserInput from '../UserInput';
 import {convertToDateString} from '../../utils';
 
 import Wallpaper from '../Wallpaper';
 import TabHeader from '../TabHeader';
-
 const AddEventScreen = ({navigation, onPut}) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -49,7 +49,7 @@ const AddEventScreen = ({navigation, onPut}) => {
       return;
     }
 
-    onPut({title, description, date});
+    onPut({title, description, date}, auth().currentUser.uid);
     navigation.navigate('MyTimeline');
   };
 

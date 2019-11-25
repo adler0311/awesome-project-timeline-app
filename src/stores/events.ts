@@ -5,7 +5,7 @@ import firestore from '@react-native-firebase/firestore';
 type Event = {
   title: string;
   description: string;
-  date: FirestoreDate;
+  date: any;
 };
 
 type EventSnapshot = {
@@ -19,12 +19,12 @@ export default class EventStore {
    * date를 객체로 저장하고 있음.
    */
   @action
-  put = async event => {
+  put = async (event, uid) => {
     this.events.push(event);
 
     await firestore()
       .collection('users')
-      .doc('rbxlBStx7GJUbkPvfdaa')
+      .doc(uid)
       .collection('events')
       .add(event);
 
@@ -37,11 +37,11 @@ export default class EventStore {
   };
 
   @action
-  fetchMyEvents = async (id = 'rbxlBStx7GJUbkPvfdaa') => {
+  fetchMyEvents = async (uid = 'rbxlBStx7GJUbkPvfdaa') => {
     const timeline = [];
     const eventsRef = await firestore()
       .collection('users')
-      .doc(id)
+      .doc(uid)
       .collection('events')
       .orderBy('date', 'desc')
       .get();

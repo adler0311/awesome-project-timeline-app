@@ -22,7 +22,7 @@ const UserItem = ({user, navigation}) => {
       </View>
       <View style={{flex: 4}}>
         <View>
-          <Text>{user.username}</Text>
+          <Text>{user.email}</Text>
         </View>
         <View>
           <Text>{user.position}</Text>

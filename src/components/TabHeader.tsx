@@ -17,11 +17,9 @@ const TabHeader = ({title, navigation, isMain = false}) => {
         backgroundColor: 'white',
         alignItems: 'center',
       }}>
-      {isMain ? null : (
-        <Left style={{flex: 1, marginLeft: 20}}>
-          <Icon name="md-arrow-back" onPress={handlePress} />
-        </Left>
-      )}
+      <Left style={{flex: 1, marginLeft: 20}}>
+        {isMain ? null : <Icon name="md-arrow-back" onPress={handlePress} />}
+      </Left>
       <Body>
         <Text style={{fontSize: 20}}>{title ? title : ''}</Text>
       </Body>
