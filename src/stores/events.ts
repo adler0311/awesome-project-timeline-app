@@ -22,13 +22,11 @@ export default class EventStore {
   put = async event => {
     this.events.push(event);
 
-    const result = await firestore()
+    await firestore()
       .collection('users')
       .doc('rbxlBStx7GJUbkPvfdaa')
       .collection('events')
       .add(event);
-
-    console.log(result);
 
     return;
   };
@@ -41,13 +39,14 @@ export default class EventStore {
   @action
   fetchMyEvents = async (id = 'rbxlBStx7GJUbkPvfdaa') => {
     const timeline = [];
-    const myEventsRef = await firestore()
+    const eventsRef = await firestore()
       .collection('users')
       .doc(id)
       .collection('events')
+      .orderBy('date', 'desc')
       .get();
 
-    myEventsRef.docs
+    eventsRef.docs
       .map((eventSnapshot: EventSnapshot) => eventSnapshot._data)
       .map((event: Event) => {
         timeline.push({...event, date: event.date.toDate()});
@@ -58,16 +57,9 @@ export default class EventStore {
     });
   };
 
-  /**
-   * firestore에 Date 객체로 저장한 경우에만 사용
-   */
   @computed
   get dateConvertedEvents() {
     if (this.events.length === 0) return this.events;
-    // console.log(new Date());
-    // this.events.map(event => {
-    //   console.log(event.date);
-    // });
     return this.events.map(event => ({
       ...event,
       date: convertToDateString(event.date),

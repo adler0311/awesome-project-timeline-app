@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {Keyboard, View} from 'react-native';
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 
@@ -11,10 +11,15 @@ import SignupSection from './SignupSection';
 
 import ForgotPassword from './ForgotPassword';
 import CreateAccount from './CreateAccount';
+import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 
 const Login = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const onPressEmptySpace = () => {
+    Keyboard.dismiss();
+  };
 
   return (
     <Wallpaper>

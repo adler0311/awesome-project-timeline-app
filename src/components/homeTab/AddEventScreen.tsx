@@ -32,7 +32,6 @@ const AddEventScreen = ({navigation, onPut}) => {
   const handleChoosePhoto = () => {
     const options = {};
     ImagePicker.showImagePicker(options, response => {
-      console.log(response);
       if (response.uri) {
         setPhoto(response);
       }
@@ -40,11 +39,7 @@ const AddEventScreen = ({navigation, onPut}) => {
   };
 
   useEffect(() => {
-    console.log('here');
-    console.log(title.length);
-    console.log(description.length);
     if (title.length > 0 && description.length > 0) {
-      console.log('done?');
       setDone(true);
     }
   }, [title, description]);
