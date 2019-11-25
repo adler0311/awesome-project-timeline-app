@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -27,6 +27,7 @@ const AddEventScreen = ({navigation, onPut}) => {
 
   const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
+  const [done, setDone] = useState(false);
 
   const handleChoosePhoto = () => {
     const options = {};
@@ -38,8 +39,19 @@ const AddEventScreen = ({navigation, onPut}) => {
     });
   };
 
+  useEffect(() => {
+    console.log('here');
+    console.log(title.length);
+    console.log(description.length);
+    if (title.length > 0 && description.length > 0) {
+      console.log('done?');
+      setDone(true);
+    }
+  }, [title, description]);
+
   const handleDonePress = () => {
     if (!(title && description)) {
+      return;
     }
 
     onPut({title, description, date});
@@ -58,6 +70,14 @@ const AddEventScreen = ({navigation, onPut}) => {
 
   const onPressEmptySpace = () => {
     Keyboard.dismiss();
+  };
+
+  const handleTitleChange = text => {
+    setTitle(text);
+  };
+
+  const handleDescriptionChange = text => {
+    setDescription(text);
   };
 
   return (
@@ -85,7 +105,7 @@ const AddEventScreen = ({navigation, onPut}) => {
                 returnKeyType={'done'}
                 autoCapitalize={'none'}
                 autoCorrect={false}
-                onChangeText={setTitle}
+                onChangeText={handleTitleChange}
               />
               <Textarea
                 rowSpan={5}
@@ -93,7 +113,7 @@ const AddEventScreen = ({navigation, onPut}) => {
                 placeholderTextColor="white"
                 style={styles.textArea}
                 value={description}
-                onChangeText={setDescription}
+                onChangeText={handleDescriptionChange}
               />
             </View>
             <View
@@ -133,9 +153,12 @@ const AddEventScreen = ({navigation, onPut}) => {
                 style={{width: 300, height: 300}}
               />
             )}
-
-            <TouchableOpacity style={styles.button} onPress={handleDonePress}>
-              <Text style={{color: 'white', fontSize: 16}}>추가</Text>
+            <TouchableOpacity
+              style={done ? styles.button : styles.doneButtonDisabled}
+              onPress={handleDonePress}>
+              <Text style={done ? styles.doneText : styles.doneTextDisabled}>
+                추가
+              </Text>
             </TouchableOpacity>
           </View>
         </TouchableWithoutFeedback>
@@ -166,6 +189,22 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderColor: 'white',
     height: 40,
+  },
+  doneButtonDisabled: {
+    borderWidth: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginVertical: 20,
+    marginHorizontal: 30,
+    borderRadius: 10,
+    height: 40,
+    borderColor: 'rgba(255,255,255,0.2)',
+    backgroundColor: 'rgba(255,255,255,0.2)',
+  },
+  doneText: {color: 'white', fontSize: 16},
+  doneTextDisabled: {
+    fontSize: 16,
+    color: 'rgba(255,255,255,0.2)',
   },
 });
 
