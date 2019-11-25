@@ -6,6 +6,8 @@ import {
   KeyboardAvoidingView,
   TouchableOpacity,
   Image,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from 'react-native';
 import {Textarea, Container} from 'native-base';
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -54,11 +56,17 @@ const AddEventScreen = ({navigation, onPut}) => {
     setDate(newDate);
   };
 
+  const onPressEmptySpace = () => {
+    Keyboard.dismiss();
+  };
+
   return (
     <Container>
       <TabHeader navigation={navigation} />
       <Wallpaper>
-        <KeyboardAvoidingView style={styles.container}>
+        <TouchableWithoutFeedback
+          style={styles.container}
+          onPress={onPressEmptySpace}>
           <View style={{flex: 1}}>
             <View
               style={{
@@ -130,7 +138,7 @@ const AddEventScreen = ({navigation, onPut}) => {
               <Text style={{color: 'white', fontSize: 16}}>추가</Text>
             </TouchableOpacity>
           </View>
-        </KeyboardAvoidingView>
+        </TouchableWithoutFeedback>
       </Wallpaper>
     </Container>
   );
