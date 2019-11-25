@@ -9,7 +9,7 @@ type CurrentUser = {
 type User = {
   username: string;
   position: string;
-  year: number;
+  year: string;
   timelineExposure: boolean;
 };
 
@@ -36,7 +36,7 @@ export default class UserStore {
   };
 
   @action
-  setUser = async (user: CurrentUser, position: string, year: number) => {
+  setUser = async (user: CurrentUser, position: string, year: string) => {
     await firestore()
       .collection('users')
       .doc(user.uid)
@@ -63,8 +63,9 @@ export default class UserStore {
       .doc(uid)
       .get();
 
+    console.log(user._data);
     runInAction(() => {
-      this.user = user;
+      this.user = user._data;
     });
   };
 }

@@ -23,23 +23,20 @@ const MyTimeline = ({
 
   const _getUser = async () => {
     await getUser(auth().currentUser.uid);
+    // getUser로 데이터를 가져오고, mobx로 user를 설정되기 전에는 user가 null이라서 그냥 false로 적용되어 버리는 문제.
+    setTimeout(function() {
+      setToggleSwitch(user.timelineExposure);
+    }, 1000);
   };
 
   useEffect(() => {
+    _fetchEvents();
     _getUser();
-
-    if (user != null) {
-      setToggleSwitch(user.timelineExposure);
-    }
   }, []);
 
   const _fetchEvents = async () => {
     await fetchEvents(auth().currentUser.uid);
   };
-
-  useEffect(() => {
-    _fetchEvents();
-  }, []);
 
   const onEventPress = event => {
     navigation.navigate('EventDetail', {event});
