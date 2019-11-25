@@ -5,10 +5,12 @@ import {
   StyleSheet,
   KeyboardAvoidingView,
   TouchableOpacity,
+  Image,
 } from 'react-native';
 import {Textarea, Container} from 'native-base';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {inject, observer} from 'mobx-react';
+import ImagePicker from 'react-native-image-picker';
 
 import UserInput from '../UserInput';
 import {convertToDateString} from '../../utils';
@@ -19,9 +21,20 @@ import TabHeader from '../TabHeader';
 const AddEventScreen = ({navigation, onPut}) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [photo, setPhoto] = useState(null);
 
   const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
+
+  const handleChoosePhoto = () => {
+    const options = {};
+    ImagePicker.showImagePicker(options, response => {
+      console.log(response);
+      if (response.uri) {
+        setPhoto(response);
+      }
+    });
+  };
 
   const handleDonePress = () => {
     onPut({title, description, date});
@@ -100,6 +113,16 @@ const AddEventScreen = ({navigation, onPut}) => {
                 onChange={handleDateTimePickerChange}
               />
             )}
+            <TouchableOpacity style={styles.button} onPress={handleChoosePhoto}>
+              <Text style={{color: 'white', fontSize: 16}}>이미지 추가</Text>
+            </TouchableOpacity>
+            {photo && (
+              <Image
+                source={{uri: photo.uri}}
+                style={{width: 300, height: 300}}
+              />
+            )}
+
             <TouchableOpacity style={styles.button} onPress={handleDonePress}>
               <Text style={{color: 'white', fontSize: 16}}>추가</Text>
             </TouchableOpacity>
