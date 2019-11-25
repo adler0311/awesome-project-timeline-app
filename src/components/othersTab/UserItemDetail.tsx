@@ -80,6 +80,6 @@ const UserItemDetail = ({navigation, timeline, fetchMyEvents, clearEvents}) => {
 
 export default inject(({eventStore}) => ({
   fetchMyEvents: eventStore.fetchMyEvents,
-  timeline: eventStore.events,
+  timeline: eventStore.dateConvertedEvents,
   clearEvents: eventStore.clearEvents,
 }))(observer(UserItemDetail));

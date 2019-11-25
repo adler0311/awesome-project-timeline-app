@@ -56,7 +56,7 @@ const AddEventScreen = ({navigation, onPut}) => {
 
   return (
     <Container>
-      <TabHeader />
+      <TabHeader navigation={navigation} />
       <Wallpaper>
         <KeyboardAvoidingView style={styles.container}>
           <View style={{flex: 1}}>
