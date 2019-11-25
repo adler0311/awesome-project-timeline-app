@@ -1,22 +1,38 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 import {inject, observer} from 'mobx-react';
 import {captureScreen} from 'react-native-view-shot';
 
 import Timeline from '../../Timeline';
 import FloatingButton from './AddEventButton';
-import {Container} from 'native-base';
+import {Container, Switch} from 'native-base';
 import TabHeader from '../TabHeader';
 import {colorTheme} from '../../theme';
 
 import auth from '@react-native-firebase/auth';
 
-type CurrentUser = {
-  email: string;
-  uid: string;
-};
+const MyTimeline = ({
+  navigation,
+  fetchEvents,
+  timeline,
+  updateMyTimelineExposure,
+  getUser,
+  user,
+}) => {
+  const [toggleSwitch, setToggleSwitch] = useState(false);
 
-const MyTimeline = ({navigation, fetchEvents, timeline}) => {
+  const _getUser = async () => {
+    await getUser(auth().currentUser.uid);
+  };
+
+  useEffect(() => {
+    _getUser();
+
+    if (user != null) {
+      setToggleSwitch(user.timelineExposure);
+    }
+  }, []);
+
   const _fetchEvents = async () => {
     await fetchEvents(auth().currentUser.uid);
   };
@@ -58,13 +74,29 @@ const MyTimeline = ({navigation, fetchEvents, timeline}) => {
     />
   );
 
+  const handleToggleSwitchChange = () => {
+    updateMyTimelineExposure(auth().currentUser.uid, toggleSwitch);
+    setToggleSwitch(!toggleSwitch);
+  };
+
   return (
     <Container style={styles.container}>
       <TabHeader isMain={true} />
-      <View style={{padding: 20, alignItems: 'flex-end'}}>
-        <TouchableOpacity onPress={onCapture} style={styles.captureButton}>
-          <Text style={{color: 'white'}}>화면 캡쳐</Text>
-        </TouchableOpacity>
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          paddingVertical: 20,
+          justifyContent: 'space-between',
+        }}>
+        <View style={{marginLeft: 20}}>
+          <TouchableOpacity onPress={onCapture} style={styles.captureButton}>
+            <Text style={{color: 'white'}}>화면 캡쳐</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={{marginRight: 20}}>
+          <Switch value={toggleSwitch} onChange={handleToggleSwitchChange} />
+        </View>
       </View>
       <View style={{flex: 1, marginBottom: 20}}>
         {timeline.length === 0 ? (
@@ -100,7 +132,10 @@ const styles = StyleSheet.create({
   },
 });
 
-export default inject(({eventStore}) => ({
+export default inject(({eventStore, userStore}) => ({
   fetchEvents: eventStore.fetchMyEvents,
   timeline: eventStore.dateConvertedEvents,
+  updateMyTimelineExposure: userStore.updateMyTimelineExposure,
+  getUser: userStore.getUser,
+  user: userStore.user,
 }))(observer(MyTimeline));

@@ -5,6 +5,7 @@ import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import Wallpaper from '../Wallpaper';
 import TabHeader from '../TabHeader';
+import {inject, observer} from 'mobx-react';
 
 type FirebaseUser = {
   email: string;
@@ -15,9 +16,11 @@ type CreateUserResponse = {
   user: FirebaseUser;
 };
 
-export default function CreateAccount({navigation}) {
+const CreateAccount = ({setUser}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [position, setPosition] = useState('');
+  const [year, setYear] = useState(1);
 
   const handleSignUp = () => {
     if (email.length === 0 || password.length === 0) return;
@@ -25,18 +28,10 @@ export default function CreateAccount({navigation}) {
     auth()
       .createUserWithEmailAndPassword(email, password)
       .then((response: CreateUserResponse) => {
-        console.log(response.user);
         return response.user;
       })
       .then((user: FirebaseUser) => {
-        firestore()
-          .collection('users')
-          .doc(user.uid)
-          .set({
-            position: '웹 개발',
-            year: 1,
-            email: user.email,
-          });
+        setUser(user, position, year);
       })
 
       .catch(error => {
@@ -77,7 +72,7 @@ export default function CreateAccount({navigation}) {
       </View>
     </Wallpaper>
   );
-}
+};
 
 const MARGIN = 40;
 
@@ -126,3 +121,7 @@ const styles = StyleSheet.create({
     color: 'rgba(255,255,255,0.2)',
   },
 });
+
+export default inject(({userStore}) => ({
+  user: userStore.setUser,
+}))(observer(CreateAccount));
