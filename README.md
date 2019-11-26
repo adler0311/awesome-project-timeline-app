@@ -27,7 +27,5 @@
 ![preview_1](./assets/preview_1.png)
 ![preview_2](./assets/preview_2.png)
 
----
-
 ![preview_3](./assets/preview_3.png)
 ![preview_4](./assets/preview_4.png)
