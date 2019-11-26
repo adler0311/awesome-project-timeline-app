@@ -70,52 +70,52 @@ const CreateAccount = ({setUser}) => {
       });
   };
 
+  const renderChildren = () => (
+    <TouchableWithoutFeedback style={{flex: 1}} onPress={onPressEmptySpace}>
+      <View style={{flex: 1}}>
+        <View style={styles.titleContainer}>
+          <Text style={styles.titleText}>계정 생성</Text>
+        </View>
+        <View style={styles.buttonContainer}>
+          <Form setEmail={setEmail} setPassword={setPassword} />
+          <UserInput
+            source={null}
+            secureTextEntry={false}
+            placeholder="직무"
+            returnKeyType={'done'}
+            autoCapitalize={'none'}
+            autoCorrect={false}
+            onChangeText={setPosition}
+          />
+          <View style={styles.pickerWrapper}>
+            <Picker
+              selectedValue={year}
+              onValueChange={year => setYear(year)}
+              style={{marginHorizontal: 10, color: 'white'}}>
+              <Picker.Item label="~2년차" value="~2년차" />
+              <Picker.Item label="3~5년차" value="3~5년차" />
+              <Picker.Item label="5~7년차" value="5~7년차" />
+              <Picker.Item label="7~10년차" value="7~10년차" />
+              <Picker.Item label="10년차~" value="10년차~" />
+            </Picker>
+          </View>
+          <TouchableOpacity
+            style={onReady() ? styles.button : styles.buttonDisabled}
+            onPress={handleSignUp}>
+            <Text
+              style={onReady() ? styles.buttonText : styles.buttonTextDisabled}>
+              가입하기
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </TouchableWithoutFeedback>
+  );
+
   return (
     <Container>
       <TabHeader />
-      <Wallpaper>
-        <TouchableWithoutFeedback style={{flex: 1}} onPress={onPressEmptySpace}>
-          <View style={{flex: 1}}>
-            <View style={styles.titleContainer}>
-              <Text style={styles.titleText}>계정 생성</Text>
-            </View>
-            <View style={styles.buttonContainer}>
-              <Form setEmail={setEmail} setPassword={setPassword} />
-              <UserInput
-                source={null}
-                secureTextEntry={false}
-                placeholder="직무"
-                returnKeyType={'done'}
-                autoCapitalize={'none'}
-                autoCorrect={false}
-                onChangeText={setPosition}
-              />
-              <View style={styles.pickerWrapper}>
-                <Picker
-                  selectedValue={year}
-                  onValueChange={year => setYear(year)}
-                  style={{marginHorizontal: 10, color: 'white'}}>
-                  <Picker.Item label="~2년차" value="~2년차" />
-                  <Picker.Item label="3~5년차" value="3~5년차" />
-                  <Picker.Item label="5~7년차" value="5~7년차" />
-                  <Picker.Item label="7~10년차" value="7~10년차" />
-                  <Picker.Item label="10년차~" value="10년차~" />
-                </Picker>
-              </View>
-              <TouchableOpacity
-                style={onReady() ? styles.button : styles.buttonDisabled}
-                onPress={handleSignUp}>
-                <Text
-                  style={
-                    onReady() ? styles.buttonText : styles.buttonTextDisabled
-                  }>
-                  가입하기
-                </Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </TouchableWithoutFeedback>
-      </Wallpaper>
+      <Wallpaper children={renderChildren()} />
     </Container>
   );
 };

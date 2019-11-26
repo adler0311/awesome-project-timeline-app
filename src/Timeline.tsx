@@ -1,32 +1,16 @@
 import React, {useState} from 'react';
-import {
-  StyleSheet,
-  FlatList,
-  Image,
-  View,
-  Text,
-  TouchableOpacity,
-} from 'react-native';
+import {StyleSheet, FlatList, View, Text, TouchableOpacity} from 'react-native';
 import {observer} from 'mobx-react';
 
 const Timeline = ({
   data,
-  style,
-  listViewStyle,
-  options,
-
   columnFormat = 'single-column-left',
-  rowContainerStyle,
+  // rowContainerStyle,
   showTime = true,
-  timeContainerStyle,
-  timeStyle,
-  renderFullLine,
   onEventPress,
   detailContainerStyle,
   titleStyle,
-  descriptionStyle,
   separator,
-  separatorStyle,
   circleSize = 70,
   circleColor = '#007AFF',
   lineColor = 'black',
@@ -40,39 +24,39 @@ const Timeline = ({
     switch (columnFormat) {
       case 'single-column-left':
         content = (
-          <View style={[styles.rowContainer, rowContainerStyle]}>
+          <View style={[styles.rowContainer]}>
             {renderTime(item, index)}
             {renderEvent(item, index)}
             {renderCircle(item, index)}
           </View>
         );
         break;
-      case 'single-column-right':
-        content = (
-          <View style={[styles.rowContainer, rowContainerStyle]}>
-            {renderEvent(item, index)}
-            {renderTime(item, index)}
-            {renderCircle(item, index)}
-          </View>
-        );
-        break;
-      case 'two-column':
-        content =
-          (item.position && item.position === 'right') ||
-          (!item.position && index % 2 === 0) ? (
-            <View style={[styles.rowContainer, rowContainerStyle]}>
-              {renderTime(item, index)}
-              {renderEvent(item, index)}
-              {renderCircle(item, index)}
-            </View>
-          ) : (
-            <View style={[styles.rowContainer, rowContainerStyle]}>
-              {renderEvent(item, index)}
-              {renderTime(item, index)}
-              {renderCircle(item, index)}
-            </View>
-          );
-        break;
+      // case 'single-column-right':
+      //   content = (
+      //     <View style={[styles.rowContainer]}>
+      //       {renderEvent(item, index)}
+      //       {renderTime(item, index)}
+      //       {renderCircle(item, index)}
+      //     </View>
+      //   );
+      //   break;
+      // case 'two-column':
+      //   content =
+      //     (item.position && item.position === 'right') ||
+      //     (!item.position && index % 2 === 0) ? (
+      //       <View style={[styles.rowContainer]}>
+      //         {renderTime(item, index)}
+      //         {renderEvent(item, index)}
+      //         {renderCircle(item, index)}
+      //       </View>
+      //     ) : (
+      //       <View style={[styles.rowContainer]}>
+      //         {renderEvent(item, index)}
+      //         {renderTime(item, index)}
+      //         {renderCircle(item, index)}
+      //       </View>
+      //     );
+      // break;
     }
 
     return <View key={index}>{content}</View>;
@@ -93,35 +77,33 @@ const Timeline = ({
           left: 10,
         };
         break;
-      case 'single-column-right':
-        timeWrapper = {
-          alignItems: 'flex-start',
-        };
-        break;
-      case 'two-column':
-        timeWrapper = {
-          flex: 1,
-          alignItems:
-            (rowData.position && rowData.position === 'right') ||
-            (!rowData.position && rowID % 2 === 0)
-              ? 'flex-end'
-              : 'flex-start',
-        };
-        break;
+      // case 'single-column-right':
+      //   timeWrapper = {
+      //     alignItems: 'flex-start',
+      //   };
+      //   break;
+      // case 'two-column':
+      //   timeWrapper = {
+      //     flex: 1,
+      //     alignItems:
+      //       (rowData.position && rowData.position === 'right') ||
+      //       (!rowData.position && rowID % 2 === 0)
+      //         ? 'flex-end'
+      //         : 'flex-start',
+      //   };
+      //   break;
     }
     return (
       <View style={timeWrapper}>
-        <View style={[styles.timeContainer, timeContainerStyle]}>
-          <Text style={[styles.time, timeStyle]}>{rowData.date}</Text>
+        <View style={[styles.timeContainer]}>
+          <Text style={[styles.time]}>{rowData.date}</Text>
         </View>
       </View>
     );
   };
 
   const renderEvent = (rowData, rowID) => {
-    const isLast = renderFullLine
-      ? renderFullLine
-      : data.slice(-1)[0] === rowData;
+    const isLast = data.slice(-1)[0] === rowData;
     lineColor = isLast
       ? 'rgba(0,0,0,0)'
       : rowData.lineColor
@@ -141,34 +123,34 @@ const Timeline = ({
           zIndex: -1,
         };
         break;
-      case 'single-column-right':
-        opStyle = {
-          borderColor: lineColor,
-          borderLeftWidth: 0,
-          borderRightWidth: lineWidth,
-          marginRight: 20,
-          paddingRight: 20,
-        };
-        break;
-      case 'two-column':
-        opStyle =
-          (rowData.position && rowData.position === 'right') ||
-          (!rowData.position && rowID % 2 === 0)
-            ? {
-                borderColor: lineColor,
-                borderLeftWidth: lineWidth,
-                borderRightWidth: 0,
-                marginLeft: 20,
-                paddingLeft: 20,
-              }
-            : {
-                borderColor: lineColor,
-                borderLeftWidth: 0,
-                borderRightWidth: lineWidth,
-                marginRight: 20,
-                paddingRight: 20,
-              };
-        break;
+      // case 'single-column-right':
+      //   opStyle = {
+      //     borderColor: lineColor,
+      //     borderLeftWidth: 0,
+      //     borderRightWidth: 2,
+      //     marginRight: 20,
+      //     paddingRight: 20,
+      //   };
+      //   break;
+      // case 'two-column':
+      //   opStyle =
+      //     (rowData.position && rowData.position === 'right') ||
+      //     (!rowData.position && rowID % 2 === 0)
+      //       ? {
+      //           borderColor: lineColor,
+      //           borderLeftWidth: 2,
+      //           borderRightWidth: 0,
+      //           marginLeft: 20,
+      //           paddingLeft: 20,
+      //         }
+      //       : {
+      //           borderColor: lineColor,
+      //           borderLeftWidth: 0,
+      //           borderRightWidth: 2,
+      //           marginRight: 20,
+      //           paddingRight: 20,
+      //         };
+      //   break;
     }
 
     return (
@@ -196,7 +178,7 @@ const Timeline = ({
     let title = rowData.description ? (
       <View>
         <Text style={[styles.title, titleStyle]}>{rowData.title}</Text>
-        <Text style={[styles.description, descriptionStyle]}>
+        <Text style={[styles.description]}>
           {rowData.description.length < 20
             ? rowData.description
             : `${rowData.description.slice(0, 20)}...`}
@@ -221,24 +203,24 @@ const Timeline = ({
           left: 10,
         };
         break;
-      case 'single-column-right':
-        circleStyle = {
-          width: width ? circleSize : 0,
-          height: width ? circleSize : 0,
-          borderRadius: circleSize / 2,
-          backgroundColor: circleColor,
-          left: width - circleSize / 2 - (lineWidth - 1) / 2,
-        };
-        break;
-      case 'two-column':
-        circleStyle = {
-          width: width ? circleSize : 0,
-          height: width ? circleSize : 0,
-          borderRadius: circleSize / 2,
-          backgroundColor: circleColor,
-          left: width - circleSize / 2 - (lineWidth - 1) / 2,
-        };
-        break;
+      // case 'single-column-right':
+      //   circleStyle = {
+      //     width: width ? circleSize : 0,
+      //     height: width ? circleSize : 0,
+      //     borderRadius: circleSize / 2,
+      //     backgroundColor: circleColor,
+      //     left: 10,
+      //   };
+      //   break;
+      // case 'two-column':
+      //   circleStyle = {
+      //     width: width ? circleSize : 0,
+      //     height: width ? circleSize : 0,
+      //     borderRadius: circleSize / 2,
+      //     backgroundColor: circleColor,
+      //     left: 10,
+      //   };
+      //   break;
     }
 
     let innerCircle = null;
@@ -282,19 +264,18 @@ const Timeline = ({
     if (!separator) {
       return null;
     }
-    return <View style={[styles.separator, separatorStyle]} />;
+    return <View style={[styles.separator]} />;
   };
 
   return (
-    <View style={[styles.container, style]}>
+    <View style={[styles.container]}>
       <FlatList
-        style={[styles.listview, listViewStyle]}
+        style={[styles.listview]}
         data={data}
         renderItem={renderItem}
         keyExtractor={(_, index) => {
           return index + '';
         }}
-        {...options}
       />
     </View>
   );

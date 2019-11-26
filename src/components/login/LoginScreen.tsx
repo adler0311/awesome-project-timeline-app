@@ -20,16 +20,18 @@ const Login = ({navigation}) => {
     Keyboard.dismiss();
   };
 
-  return (
-    <Wallpaper>
+  const renderChildren = () => (
+    <>
       <Logo />
       <View style={{flex: 1}}>
         <Form setEmail={setEmail} setPassword={setPassword} />
         <ButtonSubmit email={email} password={password} />
         <SignupSection navigation={navigation} />
       </View>
-    </Wallpaper>
+    </>
   );
+
+  return <Wallpaper children={renderChildren()}></Wallpaper>;
 };
 
 const LoginScreen = createAppContainer(

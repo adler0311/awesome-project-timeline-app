@@ -64,7 +64,7 @@ const MyTimeline = ({
         marginVertical: 15,
       }}
       titleStyle={{color: colorTheme}}
-      // separator={true}
+      separator={false}
       lineColor={colorTheme}
     />
   );

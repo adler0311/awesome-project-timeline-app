@@ -60,14 +60,13 @@ const UserItemDetail = ({navigation, timeline, fetchMyEvents, clearEvents}) => {
         <Timeline
           data={timeline}
           onEventPress={onEventPress}
-          columnFormat="single-column-left"
           detailContainerStyle={{
             padding: 10,
             marginVertical: 20,
           }}
           titleStyle={{color: colorTheme}}
-          descriptionStyle={{color: 'black'}}
           lineColor={colorTheme}
+          separator={false}
         />
       ) : (
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>

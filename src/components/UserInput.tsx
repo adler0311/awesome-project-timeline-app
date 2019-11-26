@@ -2,13 +2,13 @@ import React from 'react';
 import {StyleSheet, View, TextInput, Image, Dimensions} from 'react-native';
 
 type PropUserInput = {
-  source: number;
+  source: any;
   placeholder: string;
   secureTextEntry: boolean;
   autoCorrect: boolean;
   autoCapitalize: string;
   returnKeyType: string;
-  onChangeText: (changeText: string) => null;
+  onChangeText: (changeText: string) => void;
 };
 
 export default function UserInput({

@@ -4,7 +4,7 @@ import auth from '@react-native-firebase/auth';
 
 import UserInput from '../UserInput';
 import Wallpaper from '../Wallpaper';
-import usernameImg from '../../images/username.png';
+import * as usernameImg from '../../images/username.png';
 import TabHeader from '../TabHeader';
 
 export default function ForgotPassword({navigation}) {
@@ -17,8 +17,8 @@ export default function ForgotPassword({navigation}) {
       .catch(error => console.log(error));
   };
 
-  return (
-    <Wallpaper>
+  const renderChildren = () => (
+    <>
       <TabHeader />
       <View style={{alignItems: 'center', flex: 1, justifyContent: 'center'}}>
         <Text style={{fontSize: 32, color: 'white'}}>비밀번호 찾기</Text>
@@ -26,6 +26,7 @@ export default function ForgotPassword({navigation}) {
       <View style={styles.inputButtonContainer}>
         <View style={{marginBottom: 20}}>
           <UserInput
+            secureTextEntry={false}
             source={usernameImg}
             placeholder="이메일"
             autoCapitalize={'none'}
@@ -43,8 +44,10 @@ export default function ForgotPassword({navigation}) {
           </TouchableOpacity>
         </View>
       </View>
-    </Wallpaper>
+    </>
   );
+
+  return <Wallpaper children={renderChildren()} />;
 }
 
 const styles = StyleSheet.create({

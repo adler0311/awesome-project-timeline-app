@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, Text, Image} from 'react-native';
 
-import logoImg from '../../images/lock.jpg';
+import * as logoImg from '../../images/lock.jpg';
 
 export default class Logo extends Component {
   render() {

@@ -64,7 +64,6 @@ export default class UserStore {
       .doc(uid)
       .get();
 
-    console.log(user._data);
     runInAction(() => {
       this.user = user._data;
     });
