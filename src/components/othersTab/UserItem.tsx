@@ -28,7 +28,7 @@ const UserItem = ({user, navigation}) => {
           <Text>{user.position}</Text>
         </View>
         <View>
-          <Text>{user.year}년차</Text>
+          <Text>{user.year}</Text>
         </View>
       </View>
     </TouchableOpacity>
