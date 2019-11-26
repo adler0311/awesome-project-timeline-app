@@ -17,7 +17,6 @@ const Timeline = ({
   dotColor = 'white',
 }) => {
   const [x, setX] = useState(0);
-  const [width, setWidth] = useState(0);
 
   const renderItem = ({item, index}) => {
     let content;
@@ -104,11 +103,7 @@ const Timeline = ({
 
   const renderEvent = (rowData, rowID) => {
     const isLast = data.slice(-1)[0] === rowData;
-    lineColor = isLast
-      ? 'rgba(0,0,0,0)'
-      : rowData.lineColor
-      ? rowData.lineColor
-      : lineColor;
+    lineColor = isLast ? 'rgba(0,0,0,0)' : lineColor;
     let opStyle = null;
 
     // opStyle에서 detail 부분의 style이 정해진다.
@@ -116,11 +111,9 @@ const Timeline = ({
       case 'single-column-left':
         opStyle = {
           borderColor: lineColor,
-          borderLeftWidth: 2,
-          borderRightWidth: 0,
+          borderLeftWidth: 3,
           right: 30,
           paddingLeft: 80,
-          zIndex: -1,
         };
         break;
       // case 'single-column-right':
@@ -154,15 +147,7 @@ const Timeline = ({
     }
 
     return (
-      <View
-        style={[styles.details, opStyle]}
-        onLayout={evt => {
-          if (!x && !width) {
-            const {x, width} = evt.nativeEvent.layout;
-            setX(x);
-            setWidth(width);
-          }
-        }}>
+      <View style={[styles.details, opStyle]}>
         <TouchableOpacity
           disabled={onEventPress == null}
           style={[detailContainerStyle]}
@@ -196,8 +181,8 @@ const Timeline = ({
     switch (columnFormat) {
       case 'single-column-left':
         circleStyle = {
-          width: x ? circleSize : 0,
-          height: x ? circleSize : 0,
+          width: circleSize,
+          height: circleSize,
           borderRadius: circleSize / 2,
           backgroundColor: 'white',
           left: 10,
