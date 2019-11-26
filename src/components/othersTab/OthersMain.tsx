@@ -9,33 +9,6 @@ import {inject} from 'mobx-react';
 import {observer} from 'mobx-react-lite';
 
 const OthersMain = ({navigation, getUsers, users}) => {
-  // const getTimelines = async () => {
-  //   const timelines = [];
-
-  //   const usersRef = await firestore()
-  //     .collection('users')
-  //     .get();
-
-  //   let user;
-  //   for (user of usersRef.docs) {
-  //     const {username, position, year} = user._data;
-  //     const timeline = {uid: user.id, events: [], username, position, year};
-  //     const eventsRef = await firestore()
-  //       .collection('users')
-  //       .doc(user.id)
-  //       .collection('events')
-  //       .get();
-
-  //     let event;
-  //     for (event of eventsRef.docs) {
-  //       timeline.events.push(event._data);
-  //     }
-  //     timelines.push(timeline);
-  //   }
-
-  //   setTimelines(timelines);
-  // };
-
   const _getUsers = async () => {
     await getUsers();
   };

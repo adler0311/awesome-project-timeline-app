@@ -50,10 +50,11 @@ export default class UserStore {
 
   @action
   updateMyTimelineExposure = async (uid: string, timelineExposure) => {
+    this.user.timelineExposure = timelineExposure;
     await firestore()
       .collection('users')
       .doc(uid)
-      .update({timelineExposure: !timelineExposure});
+      .update({timelineExposure});
   };
 
   @action

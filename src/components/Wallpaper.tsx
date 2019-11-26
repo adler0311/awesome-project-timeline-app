@@ -3,7 +3,11 @@ import {StyleSheet, ImageBackground, KeyboardAvoidingView} from 'react-native';
 
 import bgSrc from '../images/wallpaper.png';
 
-export default function Wallpaper({children}) {
+type PropWallpaper = {
+  children: any;
+};
+
+export default function Wallpaper({children}: PropWallpaper) {
   return (
     <ImageBackground style={styles.picture} source={bgSrc}>
       <KeyboardAvoidingView style={{flex: 1}}>{children}</KeyboardAvoidingView>

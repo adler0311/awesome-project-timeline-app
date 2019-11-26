@@ -13,30 +13,28 @@ import auth from '@react-native-firebase/auth';
 
 const MyTimeline = ({
   navigation,
-  fetchEvents,
+  fetchEvent,
   timeline,
   updateMyTimelineExposure,
   getUser,
   user,
 }) => {
-  const [toggleSwitch, setToggleSwitch] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const _getUser = async () => {
     await getUser(auth().currentUser.uid);
-    // getUser로 데이터를 가져오고, mobx로 user를 설정되기 전에는 user가 null이라서 그냥 false로 적용되어 버리는 문제.
-    setTimeout(function() {
-      setToggleSwitch(user.timelineExposure);
-    }, 1000);
+  };
+
+  const _fetchEvent = async () => {
+    await fetchEvent(auth().currentUser.uid);
   };
 
   useEffect(() => {
-    _fetchEvents();
+    _fetchEvent().then(() => {
+      setIsLoading(false);
+    });
     _getUser();
   }, []);
-
-  const _fetchEvents = async () => {
-    await fetchEvents(auth().currentUser.uid);
-  };
 
   const onEventPress = event => {
     navigation.navigate('EventDetail', {event});
@@ -71,9 +69,8 @@ const MyTimeline = ({
     />
   );
 
-  const handleToggleSwitchChange = () => {
-    updateMyTimelineExposure(auth().currentUser.uid, toggleSwitch);
-    setToggleSwitch(!toggleSwitch);
+  const handleToggleSwitchChange = e => {
+    updateMyTimelineExposure(auth().currentUser.uid, e.nativeEvent.value);
   };
 
   return (
@@ -92,18 +89,27 @@ const MyTimeline = ({
           </TouchableOpacity>
         </View>
         <View style={{marginRight: 20}}>
-          <Switch value={toggleSwitch} onChange={handleToggleSwitchChange} />
+          <Switch
+            value={user ? user.timelineExposure : false}
+            onChange={handleToggleSwitchChange}
+          />
         </View>
       </View>
+
       <View style={{flex: 1, marginBottom: 20}}>
-        {timeline.length === 0 ? (
+        {!isLoading && timeline.length > 0 ? (
+          renderTimeline()
+        ) : (
           <View
             style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-            <Text>아직 이벤트가 없습니다. 추가해보세요!</Text>
+            <Text>
+              {isLoading
+                ? '로딩 중입니다...'
+                : '아직 이벤트가 없습니다. 추가해보세요!'}
+            </Text>
           </View>
-        ) : (
-          renderTimeline()
         )}
+
         <FloatingButton
           backgroundColor={colorTheme}
           upButtonHandler={floatingButtonHandler}
@@ -130,7 +136,7 @@ const styles = StyleSheet.create({
 });
 
 export default inject(({eventStore, userStore}) => ({
-  fetchEvents: eventStore.fetchMyEvents,
+  fetchEvent: eventStore.fetchMyEvents,
   timeline: eventStore.dateConvertedEvents,
   updateMyTimelineExposure: userStore.updateMyTimelineExposure,
   getUser: userStore.getUser,

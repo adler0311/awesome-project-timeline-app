@@ -130,7 +130,7 @@ const AddEventScreen = ({navigation, onPut}) => {
                 {convertToDateString(date)}
               </Text>
             </View>
-            {/* {show && (
+            {show && (
               <DateTimePicker
                 value={date}
                 mode={'date'}
@@ -138,7 +138,7 @@ const AddEventScreen = ({navigation, onPut}) => {
                 display="default"
                 onChange={handleDateTimePickerChange}
               />
-            )} */}
+            )}
             <TouchableOpacity style={styles.button} onPress={handleChoosePhoto}>
               <Text style={{color: 'white', fontSize: 16}}>이미지 추가</Text>
             </TouchableOpacity>
