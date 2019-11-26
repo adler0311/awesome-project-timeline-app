@@ -38,13 +38,7 @@ export default function EventDetail({navigation}) {
               marginVertical: 50,
               marginHorizontal: 50,
             }}>
-            <Text>
-              {event.description}
-              fddsakfdafdjaskjfdaslfdasjfl;afjla;fjlfksafjaslk;fjflk;fjsalk;fjlask;fj;
-              fddsakfdafdjaskjfdaslfdasjfl;afjla;fjlfksafjaslk;fjflk;fjsalk;fjlask;fj;fddsakfdafdjaskjfdaslfdasjfl;afjla;fjlfksafjaslk;fjflk;fjsalk;fjlask;fj;fddsakfdafdjaskjfdaslfdasjfl;afjla;fjlfksafjaslk;fjflk;fjsalk;fjlask;fj;fddsakfdafdjaskjfdaslfdasjfl;afjla;fjlfksafjaslk;fjflk;fjsalk;fjlask;fj;fddsakfdafdjaskjfdaslfdasjfl;afjla;fjlfksafjaslk;fjflk;fjsalk;fjlask;fj;fddsakfdafdjaskjfdaslfdasjfl;afjla;fjlfksafjaslk;fjflk;fjsalk;fjlask;fj;
-              fddsakfdafdjaskjfdaslfdasjfl;afjla;fjlfksafjaslk;fjflk;fjsalk;fjlask;fj;fddsakfdafdjaskjfdaslfdasjfl;afjla;fjlfksafjaslk;fjflk;fjsalk;fjlask;fj;fddsakfdafdjaskjfdaslfdasjfl;afjla;fjlfksafjaslk;fjflk;fjsalk;fjlask;fj;fddsakfdafdjaskjfdaslfdasjfl;afjla;fjlfksafjaslk;fjflk;fjsalk;fjlask;fj;fddsakfdafdjaskjfdaslfdasjfl;afjla;fjlfksafjaslk;fjflk;fjsalk;fjlask;fj;fddsakfdafdjaskjfdaslfdasjfl;afjla;fjlfksafjaslk;fjflk;fjsalk;fjlask;fj;
-              fddsakfdafdjaskjfdaslfdasjfl;afjla;fjlfksafjaslk;fjflk;fjsalk;fjlask;fj;fddsakfdafdjaskjfdaslfdasjfl;afjla;fjlfksafjaslk;fjflk;fjsalk;fjlask;fj;fddsakfdafdjaskjfdaslfdasjfl;afjla;fjlfksafjaslk;fjflk;fjsalk;fjlask;fj;fddsakfdafdjaskjfdaslfdasjfl;afjla;fjlfksafjaslk;fjflk;fjsalk;fjlask;fj;fddsakfdafdjaskjfdaslfdasjfl;afjla;fjlfksafjaslk;fjflk;fjsalk;fjlask;fj;fddsakfdafdjaskjfdaslfdasjfl;afjla;fjlfksafjaslk;fjflk;fjsalk;fjlask;fj;
-            </Text>
+            <Text>{event.description}</Text>
           </View>
         </View>
 

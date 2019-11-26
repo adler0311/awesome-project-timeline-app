@@ -51,7 +51,7 @@ const UserItemDetail = ({navigation, timeline, fetchMyEvents, clearEvents}) => {
               <Text>{userData.position}</Text>
             </View>
             <View>
-              <Text>{userData.year}년차</Text>
+              <Text>{userData.year}</Text>
             </View>
           </View>
         </View>
@@ -70,7 +70,7 @@ const UserItemDetail = ({navigation, timeline, fetchMyEvents, clearEvents}) => {
         />
       ) : (
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-          <Text>Waiting...</Text>
+          <Text>기다리는 중...</Text>
         </View>
       )}
     </Container>
