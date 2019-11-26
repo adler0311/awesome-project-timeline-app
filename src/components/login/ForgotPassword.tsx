@@ -19,7 +19,7 @@ export default function ForgotPassword({navigation}) {
 
   const renderChildren = () => (
     <>
-      <TabHeader />
+      <TabHeader isLoggedIn={false} />
       <View style={{alignItems: 'center', flex: 1, justifyContent: 'center'}}>
         <Text style={{fontSize: 32, color: 'white'}}>비밀번호 찾기</Text>
       </View>

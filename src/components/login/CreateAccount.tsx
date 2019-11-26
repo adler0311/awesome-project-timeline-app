@@ -114,7 +114,7 @@ const CreateAccount = ({setUser}) => {
 
   return (
     <Container>
-      <TabHeader />
+      <TabHeader isLoggedIn={false} />
       <Wallpaper children={renderChildren()} />
     </Container>
   );

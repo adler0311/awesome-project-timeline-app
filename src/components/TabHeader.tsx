@@ -7,7 +7,7 @@ import {withNavigation} from 'react-navigation';
 
 const colorTheme = '#FF5FF1';
 
-const TabHeader = ({title, navigation, isMain = false}) => {
+const TabHeader = ({title, navigation, isMain = false, isLoggedIn = true}) => {
   const handlePress = () => {
     navigation.goBack();
   };
@@ -24,12 +24,14 @@ const TabHeader = ({title, navigation, isMain = false}) => {
         <Text style={{fontSize: 20}}>{title ? title : ''}</Text>
       </Body>
       <Right style={{flex: 1, marginRight: 10}}>
-        <Icon
-          type="MaterialCommunityIcons"
-          name="logout"
-          onPress={() => auth().signOut()}
-          color={colorTheme}
-        />
+        {!isLoggedIn ? null : (
+          <Icon
+            type="MaterialCommunityIcons"
+            name="logout"
+            onPress={() => auth().signOut()}
+            color={colorTheme}
+          />
+        )}
       </Right>
     </Header>
   );
