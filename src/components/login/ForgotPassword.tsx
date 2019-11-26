@@ -4,7 +4,7 @@ import auth from '@react-native-firebase/auth';
 
 import UserInput from '../UserInput';
 import Wallpaper from '../Wallpaper';
-import * as usernameImg from '../../images/username.png';
+import usernameImg from '../../images/username.png';
 import TabHeader from '../TabHeader';
 
 export default function ForgotPassword({navigation}) {
@@ -65,11 +65,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#F035E0',
     height: 40,
-    borderRadius: 20,
+    borderRadius: 10,
     zIndex: 100,
   },
   text: {
-    fontSize: 18,
+    fontSize: 16,
     color: 'white',
   },
 });
