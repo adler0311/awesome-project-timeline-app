@@ -100,6 +100,7 @@ const AddEventScreen = ({navigation, onPut}) => {
             autoCorrect={false}
             onChangeText={handleTitleChange}
             placeholderTextColor={darkTheme.fontColor}
+            inputTextColor={darkTheme.fontColor}
           />
           <Textarea
             rowSpan={5}
