@@ -10,6 +10,7 @@ type PropUserInput = {
   autoCapitalize: string;
   returnKeyType: string;
   onChangeText: (changeText: string) => void;
+  placeholderTextColor: string;
 };
 
 export default function UserInput({

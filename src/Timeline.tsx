@@ -15,7 +15,7 @@ const Timeline = ({
   circleColor = '#007AFF',
   lineColor = 'black',
   dotColor = 'white',
-  descriptionStyle,
+  descriptionStyle = null,
   inputCircleStyle = null,
 }) => {
   const [x, setX] = useState(0);
