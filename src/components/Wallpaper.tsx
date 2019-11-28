@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {StyleSheet, ImageBackground, KeyboardAvoidingView} from 'react-native';
 
-import bgSrc from '../images/wallpaper.png';
+import bgSrc from '../images/wallpaper5.jpg';
 
 type PropWallpaper = {
   children: any;
