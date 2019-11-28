@@ -3,6 +3,7 @@ import {View, Text, Image, Dimensions} from 'react-native';
 import TabHeader from './TabHeader';
 import {Container, Right, Content} from 'native-base';
 import storage from '@react-native-firebase/storage';
+import {darkTheme} from '../theme';
 
 const {width} = Dimensions.get('window');
 
@@ -23,10 +24,10 @@ export default function EventDetail({navigation}) {
   return (
     <Container>
       <TabHeader navigation={navigation} />
-      <Content>
+      <Content style={{backgroundColor: darkTheme.backgroundColor}}>
         <View style={{flex: 1}}>
           <View style={{alignItems: 'center', margin: 20, flex: 1}}>
-            <Text style={{fontSize: 40}}>{event.title}</Text>
+            <Text style={{fontSize: 32}}>{event.title}</Text>
           </View>
           <View style={{alignItems: 'flex-end', marginRight: 30, flex: 1}}>
             <Text>{event.date}</Text>

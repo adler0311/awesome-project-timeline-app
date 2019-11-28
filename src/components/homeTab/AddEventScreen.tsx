@@ -19,6 +19,7 @@ import {convertToDateString} from '../../utils';
 
 import Wallpaper from '../Wallpaper';
 import TabHeader from '../TabHeader';
+import {darkTheme} from '../../theme';
 
 const AddEventScreen = ({navigation, onPut}) => {
   const [title, setTitle] = useState('');
@@ -31,6 +32,7 @@ const AddEventScreen = ({navigation, onPut}) => {
   const handleChoosePhoto = () => {
     const options = {};
     ImagePicker.showImagePicker(options, response => {
+      console.log(response);
       if (response.uri) {
         setPhoto(response);
       }
@@ -75,9 +77,7 @@ const AddEventScreen = ({navigation, onPut}) => {
   };
 
   const renderChildren = () => (
-    <TouchableWithoutFeedback
-      style={styles.container}
-      onPress={onPressEmptySpace}>
+    <TouchableWithoutFeedback style={{flex: 1}} onPress={onPressEmptySpace}>
       <View style={{flex: 1}}>
         <View
           style={{
@@ -86,7 +86,9 @@ const AddEventScreen = ({navigation, onPut}) => {
             marginVertical: 30,
             flex: 1,
           }}>
-          <Text style={{fontSize: 28, color: 'white'}}>이벤트 추가</Text>
+          <Text style={{fontSize: 28, color: darkTheme.fontColor}}>
+            이벤트 추가
+          </Text>
         </View>
         <View>
           <UserInput
@@ -97,11 +99,12 @@ const AddEventScreen = ({navigation, onPut}) => {
             autoCapitalize={'none'}
             autoCorrect={false}
             onChangeText={handleTitleChange}
+            placeholderTextColor={darkTheme.fontColor}
           />
           <Textarea
             rowSpan={5}
             placeholder="설명"
-            placeholderTextColor="white"
+            placeholderTextColor={darkTheme.fontColor}
             style={styles.textArea}
             value={description}
             onChangeText={handleDescriptionChange}
@@ -119,10 +122,10 @@ const AddEventScreen = ({navigation, onPut}) => {
               styles.button,
               {paddingHorizontal: 30, marginHorizontal: 0},
             ]}>
-            <Text style={{color: 'white'}}>날짜 선택</Text>
+            <Text style={{color: darkTheme.fontColor}}>날짜 선택</Text>
           </TouchableOpacity>
 
-          <Text style={{color: 'white', fontSize: 16}}>
+          <Text style={{color: darkTheme.fontColor, fontSize: 16}}>
             {convertToDateString(date)}
           </Text>
         </View>
@@ -136,7 +139,9 @@ const AddEventScreen = ({navigation, onPut}) => {
           />
         )}
         <TouchableOpacity style={styles.button} onPress={handleChoosePhoto}>
-          <Text style={{color: 'white', fontSize: 16}}>이미지 추가</Text>
+          <Text style={{color: darkTheme.fontColor, fontSize: 16}}>
+            이미지 추가
+          </Text>
         </TouchableOpacity>
         {photo && (
           <Image source={{uri: photo.uri}} style={{width: 300, height: 300}} />
@@ -153,9 +158,9 @@ const AddEventScreen = ({navigation, onPut}) => {
   );
 
   return (
-    <Container>
+    <Container style={styles.container}>
       <TabHeader navigation={navigation} />
-      <Wallpaper children={renderChildren()} />
+      {renderChildren()}
     </Container>
   );
 };
@@ -163,12 +168,13 @@ const AddEventScreen = ({navigation, onPut}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: darkTheme.backgroundColor,
   },
   textArea: {
     borderRadius: 10,
     margin: 20,
     marginTop: 20,
-    color: 'white',
+    color: darkTheme.fontColor,
     padding: 10,
     paddingLeft: 20,
     backgroundColor: 'rgba(255, 255, 255, 0.4)',
@@ -180,7 +186,7 @@ const styles = StyleSheet.create({
     marginVertical: 20,
     marginHorizontal: 30,
     borderRadius: 10,
-    borderColor: 'white',
+    borderColor: darkTheme.borderColor,
     height: 40,
   },
   doneButtonDisabled: {
@@ -191,13 +197,13 @@ const styles = StyleSheet.create({
     marginHorizontal: 30,
     borderRadius: 10,
     height: 40,
-    borderColor: 'rgba(255,255,255,0.2)',
-    backgroundColor: 'rgba(255,255,255,0.2)',
+    borderColor: darkTheme.fontColorDisabled,
+    backgroundColor: darkTheme.fontColorDisabled,
   },
-  doneText: {color: 'white', fontSize: 16},
+  doneText: {color: darkTheme.fontColor, fontSize: 16},
   doneTextDisabled: {
     fontSize: 16,
-    color: 'rgba(255,255,255,0.2)',
+    color: darkTheme.fontColorDisabled,
   },
 });
 

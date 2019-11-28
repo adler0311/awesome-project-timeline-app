@@ -7,9 +7,10 @@ import Timeline from '../../Timeline';
 import FloatingButton from './AddEventButton';
 import {Container, Switch} from 'native-base';
 import TabHeader from '../TabHeader';
-import {colorTheme} from '../../theme';
+import {colorTheme, darkTheme} from '../../theme';
 
 import auth from '@react-native-firebase/auth';
+import {NavigationEvents} from 'react-navigation';
 
 const MyTimeline = ({
   navigation,
@@ -22,6 +23,7 @@ const MyTimeline = ({
   const [isLoading, setIsLoading] = useState(true);
 
   const _getUser = async () => {
+    console.log(auth().currentUser);
     await getUser(auth().currentUser.uid);
   };
 
@@ -34,7 +36,7 @@ const MyTimeline = ({
       setIsLoading(false);
     });
     _getUser();
-  }, []);
+  }, [isLoading]);
 
   const onEventPress = event => {
     navigation.navigate('EventDetail', {event});
@@ -62,10 +64,17 @@ const MyTimeline = ({
       detailContainerStyle={{
         padding: 10,
         marginVertical: 15,
+        // borderWidth: 1,
+        // borderColor: darkTheme.borderColor,
+        // borderRadius: 10,
       }}
-      titleStyle={{color: colorTheme}}
+      titleStyle={{color: darkTheme.fontColor}}
+      descriptionStyle={{
+        color: darkTheme.fontColor,
+      }}
       separator={false}
-      lineColor={colorTheme}
+      lineColor={darkTheme.lineColor}
+      inputCircleStyle={{backgroundColor: darkTheme.buttonColor}}
     />
   );
 
@@ -76,6 +85,11 @@ const MyTimeline = ({
   return (
     <Container style={styles.container}>
       <TabHeader isMain={true} />
+      <NavigationEvents
+        onWillFocus={() => {
+          setIsLoading(true);
+        }}
+      />
       <View
         style={{
           flexDirection: 'row',
@@ -85,13 +99,17 @@ const MyTimeline = ({
         }}>
         <View style={{marginLeft: 20}}>
           <TouchableOpacity onPress={onCapture} style={styles.captureButton}>
-            <Text style={{color: 'white'}}>화면 캡쳐</Text>
+            <Text style={{color: darkTheme.fontColor}}>화면 캡쳐</Text>
           </TouchableOpacity>
         </View>
         <View style={{marginRight: 20}}>
           <Switch
             value={user ? user.timelineExposure : false}
             onChange={handleToggleSwitchChange}
+            trackColor={{
+              false: darkTheme.buttonColor,
+              true: darkTheme.buttonColor,
+            }}
           />
         </View>
       </View>
@@ -110,10 +128,7 @@ const MyTimeline = ({
           </View>
         )}
 
-        <FloatingButton
-          backgroundColor={colorTheme}
-          upButtonHandler={floatingButtonHandler}
-        />
+        <FloatingButton upButtonHandler={floatingButtonHandler} />
       </View>
     </Container>
   );
@@ -122,16 +137,15 @@ const MyTimeline = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: darkTheme.backgroundColor,
   },
   captureButton: {
-    borderWidth: 1,
     width: 120,
     padding: 5,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,
-    backgroundColor: colorTheme,
-    borderColor: 'white',
+    backgroundColor: darkTheme.buttonColor,
   },
 });
 

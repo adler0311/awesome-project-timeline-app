@@ -4,8 +4,7 @@ import {View, Text} from 'react-native';
 import {Icon, Container} from 'native-base';
 import TabHeader from '../TabHeader';
 import {inject, observer} from 'mobx-react';
-
-const colorTheme = '#FF5FF1';
+import {darkTheme} from '../../theme';
 
 const UserItemDetail = ({navigation, timeline, fetchMyEvents, clearEvents}) => {
   const userData = navigation.getParam('userData');
@@ -25,7 +24,7 @@ const UserItemDetail = ({navigation, timeline, fetchMyEvents, clearEvents}) => {
   };
 
   return (
-    <Container>
+    <Container style={{backgroundColor: darkTheme.backgroundColor}}>
       <TabHeader navigation={navigation} />
       <View
         style={{
@@ -64,9 +63,10 @@ const UserItemDetail = ({navigation, timeline, fetchMyEvents, clearEvents}) => {
             padding: 10,
             marginVertical: 20,
           }}
-          titleStyle={{color: colorTheme}}
-          lineColor={colorTheme}
+          titleStyle={{color: darkTheme.fontColor}}
+          lineColor={darkTheme.lineColor}
           separator={false}
+          inputCircleStyle={{backgroundColor: darkTheme.buttonColor}}
         />
       ) : (
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>

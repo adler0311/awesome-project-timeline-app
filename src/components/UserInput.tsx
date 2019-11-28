@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, View, TextInput, Image, Dimensions} from 'react-native';
+import {darkTheme} from '../theme';
 
 type PropUserInput = {
   source: any;
@@ -19,6 +20,7 @@ export default function UserInput({
   autoCapitalize,
   returnKeyType,
   onChangeText,
+  placeholderTextColor = 'white',
 }: PropUserInput) {
   return (
     <View style={styles.inputWrapper}>
@@ -30,7 +32,7 @@ export default function UserInput({
         autoCorrect={autoCorrect}
         autoCapitalize={autoCapitalize}
         returnKeyType={returnKeyType}
-        placeholderTextColor="white"
+        placeholderTextColor={placeholderTextColor}
         underlineColorAndroid="transparent"
         onChangeText={text => onChangeText(text)}
       />
@@ -38,7 +40,6 @@ export default function UserInput({
   );
 }
 const DEVICE_WIDTH = Dimensions.get('window').width;
-const DEVICE_HEIGHT = Dimensions.get('window').height;
 
 const styles = StyleSheet.create({
   input: {
@@ -48,7 +49,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     paddingLeft: 45,
     borderRadius: 10,
-    color: '#ffffff',
+    color: 'white',
   },
   inputWrapper: {
     marginTop: 10,

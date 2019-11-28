@@ -50,6 +50,7 @@ export default class UserStore {
 
   @action
   updateMyTimelineExposure = async (uid: string, timelineExposure) => {
+    // 여기서 null이 난다고?
     this.user.timelineExposure = timelineExposure;
     await firestore()
       .collection('users')
@@ -59,6 +60,7 @@ export default class UserStore {
 
   @action
   getUser = async uid => {
+    console.log(uid);
     const user = await firestore()
       .collection('users')
       .doc(uid)

@@ -4,8 +4,7 @@ import {Left, Header, Right, Body} from 'native-base';
 import {Icon} from 'native-base';
 import auth from '@react-native-firebase/auth';
 import {withNavigation} from 'react-navigation';
-
-const colorTheme = '#FF5FF1';
+import {darkTheme} from '../theme';
 
 const TabHeader = ({title, navigation, isMain = false, isLoggedIn = true}) => {
   const handlePress = () => {
@@ -14,11 +13,19 @@ const TabHeader = ({title, navigation, isMain = false, isLoggedIn = true}) => {
   return (
     <Header
       style={{
-        backgroundColor: 'white',
+        backgroundColor: darkTheme.backgroundColor,
         alignItems: 'center',
+        borderBottomWidth: 2,
+        borderBotttomColor: darkTheme.borderColor,
       }}>
       <Left style={{flex: 1, marginLeft: 20}}>
-        {isMain ? null : <Icon name="md-arrow-back" onPress={handlePress} />}
+        {isMain ? null : (
+          <Icon
+            name="md-arrow-back"
+            onPress={handlePress}
+            style={{color: darkTheme.fontColor}}
+          />
+        )}
       </Left>
       <Body>
         <Text style={{fontSize: 20}}>{title ? title : ''}</Text>
@@ -29,7 +36,7 @@ const TabHeader = ({title, navigation, isMain = false, isLoggedIn = true}) => {
             type="MaterialCommunityIcons"
             name="logout"
             onPress={() => auth().signOut()}
-            color={colorTheme}
+            style={{color: darkTheme.fontColor}}
           />
         )}
       </Right>

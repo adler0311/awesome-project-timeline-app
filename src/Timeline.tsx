@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 import {StyleSheet, FlatList, View, Text, TouchableOpacity} from 'react-native';
 import {observer} from 'mobx-react';
+import {darkTheme} from './theme';
 
 const Timeline = ({
   data,
   columnFormat = 'single-column-left',
-  // rowContainerStyle,
   showTime = true,
   onEventPress,
   detailContainerStyle,
@@ -15,6 +15,8 @@ const Timeline = ({
   circleColor = '#007AFF',
   lineColor = 'black',
   dotColor = 'white',
+  descriptionStyle,
+  inputCircleStyle = null,
 }) => {
   const [x, setX] = useState(0);
 
@@ -163,7 +165,7 @@ const Timeline = ({
     let title = rowData.description ? (
       <View>
         <Text style={[styles.title, titleStyle]}>{rowData.title}</Text>
-        <Text style={[styles.description]}>
+        <Text style={[styles.description, descriptionStyle]}>
           {rowData.description.length < 20
             ? rowData.description
             : `${rowData.description.slice(0, 20)}...`}
@@ -185,7 +187,7 @@ const Timeline = ({
           height: circleSize,
           borderRadius: circleSize / 2,
           backgroundColor: 'white',
-          left: 10,
+          left: 15,
         };
         break;
       // case 'single-column-right':
@@ -242,7 +244,11 @@ const Timeline = ({
         innerCircle = <View style={[styles.dot, dotStyle]} />;
         break;
     }
-    return <View style={[styles.circle, circleStyle]}>{innerCircle}</View>;
+    return (
+      <View style={[styles.circle, circleStyle, inputCircleStyle]}>
+        {innerCircle}
+      </View>
+    );
   };
 
   const renderSeparator = () => {
@@ -297,9 +303,9 @@ const styles = StyleSheet.create({
     width: 80,
   },
   time: {
-    textAlign: 'right',
-    color: 'black',
+    color: darkTheme.fontColor,
     overflow: 'hidden',
+    left: 2,
   },
   circle: {
     width: 16,

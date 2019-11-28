@@ -7,6 +7,7 @@ import UserItem from './UserItem';
 import TabHeader from '../TabHeader';
 import {inject} from 'mobx-react';
 import {observer} from 'mobx-react-lite';
+import {darkTheme} from '../../theme';
 
 const OthersMain = ({navigation, getUsers, users}) => {
   const _getUsers = async () => {
@@ -24,7 +25,7 @@ const OthersMain = ({navigation, getUsers, users}) => {
   return (
     <Container>
       <TabHeader navigation={navigation} isMain={true} />
-      <View conetntComponentStyle={styles.container}>
+      <View style={styles.container}>
         {users.length > 0 ? (
           <FlatList
             data={users}
@@ -51,6 +52,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
+    backgroundColor: darkTheme.backgroundColor,
   },
 });
 
