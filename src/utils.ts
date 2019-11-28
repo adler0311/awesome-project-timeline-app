@@ -4,7 +4,7 @@ export const convertToDateString = (dateObject: Date) => {
 
   const year = dateObject.getFullYear();
   const month = dateObject.getMonth() + 1;
-  const day = dateObject.getDate();
+  let day = dateObject.getDate();
 
-  return `${year}/${month}/${day}`;
+  return `${year}/${month}/${day.toString().length < 2 ? `0${day}` : `${day}`}`;
 };

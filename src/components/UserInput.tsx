@@ -11,6 +11,7 @@ type PropUserInput = {
   returnKeyType: string;
   onChangeText: (changeText: string) => void;
   placeholderTextColor: string;
+  inputTextColor: string;
 };
 
 export default function UserInput({
@@ -22,12 +23,17 @@ export default function UserInput({
   returnKeyType,
   onChangeText,
   placeholderTextColor = 'white',
+  inputTextColor = 'white',
 }: PropUserInput) {
   return (
     <View style={styles.inputWrapper}>
       <Image source={source} style={styles.inlineImg} />
       <TextInput
-        style={source ? styles.input : [styles.input, {paddingLeft: 20}]}
+        style={
+          source
+            ? styles.input
+            : [styles.input, {paddingLeft: 20, color: inputTextColor}]
+        }
         placeholder={placeholder}
         secureTextEntry={secureTextEntry}
         autoCorrect={autoCorrect}
@@ -50,7 +56,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     paddingLeft: 45,
     borderRadius: 10,
-    color: 'white',
   },
   inputWrapper: {
     marginTop: 10,
