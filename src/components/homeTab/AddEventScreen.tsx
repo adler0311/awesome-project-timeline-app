@@ -109,6 +109,7 @@ const AddEventScreen = ({navigation, onPut}) => {
             style={styles.textArea}
             value={description}
             onChangeText={handleDescriptionChange}
+            borderWidth={1}
           />
         </View>
         <View

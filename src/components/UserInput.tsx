@@ -56,6 +56,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     paddingLeft: 45,
     borderRadius: 10,
+    borderWidth: 1,
   },
   inputWrapper: {
     marginTop: 10,
