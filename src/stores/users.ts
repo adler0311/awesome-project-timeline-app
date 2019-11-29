@@ -60,7 +60,6 @@ export default class UserStore {
 
   @action
   getUser = async uid => {
-    console.log(uid);
     const user = await firestore()
       .collection('users')
       .doc(uid)

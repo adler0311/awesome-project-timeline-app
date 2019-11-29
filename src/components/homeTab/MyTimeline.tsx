@@ -7,7 +7,7 @@ import Timeline from '../../Timeline';
 import FloatingButton from './AddEventButton';
 import {Container, Switch} from 'native-base';
 import TabHeader from '../TabHeader';
-import {colorTheme, darkTheme} from '../../theme';
+import {darkTheme} from '../../theme';
 
 import auth from '@react-native-firebase/auth';
 import {NavigationEvents} from 'react-navigation';

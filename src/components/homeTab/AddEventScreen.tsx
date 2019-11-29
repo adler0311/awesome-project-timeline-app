@@ -32,7 +32,6 @@ const AddEventScreen = ({navigation, onPut}) => {
   const handleChoosePhoto = () => {
     const options = {};
     ImagePicker.showImagePicker(options, response => {
-      console.log(response);
       if (response.uri) {
         setPhoto(response);
       }
