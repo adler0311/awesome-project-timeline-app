@@ -107,9 +107,10 @@ const MyTimeline = ({
             value={user ? user.timelineExposure : false}
             onChange={handleToggleSwitchChange}
             trackColor={{
-              false: darkTheme.buttonColor,
+              false: darkTheme.fontColor,
               true: darkTheme.buttonColor,
             }}
+            thumbColor={darkTheme.buttonColor}
           />
         </View>
       </View>

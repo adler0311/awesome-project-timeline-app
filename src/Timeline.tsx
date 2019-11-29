@@ -11,8 +11,7 @@ const Timeline = ({
   detailContainerStyle,
   titleStyle,
   separator,
-  circleSize = 70,
-  circleColor = '#007AFF',
+  circleSize = 90,
   lineColor = 'black',
   dotColor = 'white',
   descriptionStyle = null,
@@ -74,7 +73,7 @@ const Timeline = ({
         timeWrapper = {
           alignItems: 'flex-end',
           zIndex: 2,
-          marginTop: 25,
+          marginTop: 35,
           left: 10,
         };
         break;
@@ -114,8 +113,9 @@ const Timeline = ({
         opStyle = {
           borderColor: lineColor,
           borderLeftWidth: 3,
-          right: 30,
-          paddingLeft: 80,
+          right: 35,
+          paddingLeft: 90,
+          paddingTop: 40,
         };
         break;
       // case 'single-column-right':
@@ -187,7 +187,7 @@ const Timeline = ({
           height: circleSize,
           borderRadius: circleSize / 2,
           backgroundColor: 'white',
-          left: 15,
+          left: 0,
         };
         break;
       // case 'single-column-right':
@@ -278,7 +278,8 @@ const styles = StyleSheet.create({
   },
   listview: {
     flex: 1,
-    paddingLeft: 50,
+    marginTop: 20,
+    paddingLeft: 40,
     paddingRight: 20,
   },
   sectionHeader: {
@@ -305,22 +306,13 @@ const styles = StyleSheet.create({
   time: {
     color: darkTheme.fontColor,
     overflow: 'hidden',
-    left: 2,
+    left: 0,
   },
   circle: {
-    width: 16,
-    height: 16,
-    borderRadius: 10,
     zIndex: 1,
     position: 'absolute',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  dot: {
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-    backgroundColor: 'white',
   },
   title: {
     fontSize: 16,

@@ -1,7 +1,7 @@
 const functionalityColor = '#f8d27e';
 
 export const darkTheme = {
-  backgroundColor: '#ffffff',
+  backgroundColor: 'rgba(227, 143, 41,0.8)',
   fontColor: 'black',
   borderColor: 'black',
   buttonColor: functionalityColor,
